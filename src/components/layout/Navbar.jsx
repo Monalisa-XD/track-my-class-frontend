@@ -6,6 +6,7 @@ import {
   Search,
   User,
   KeyRound,
+  Settings,
   LogOut,
   ChevronDown,
   ShieldCheck,
@@ -46,6 +47,7 @@ export default function Navbar({
 
   const getProfilePath = () => `/${role.toLowerCase()}/profile`;
   const getChangePasswordPath = () => `/${role.toLowerCase()}/profile?tab=password`;
+  const getSettingsPath = () => `/${role.toLowerCase()}/profile?tab=settings`;
 
   return (
     <header className="sticky top-0 z-20 bg-white border-b border-slate-200/80 shadow-xs select-none">
@@ -60,7 +62,7 @@ export default function Navbar({
             <Menu className="w-6 h-6" />
           </button>
 
-          <div className="hidden sm:flex items-center relative w-72 md:w-[350px]">
+          <div className="hidden sm:flex items-center relative md:w-[380px] lg:w-[400px]">
             <Search className="w-4 h-4 absolute left-3.5 text-slate-400" />
             <input
               type="text"
@@ -159,7 +161,7 @@ export default function Navbar({
                   <Link
                     to={getProfilePath()}
                     onClick={() => setIsProfileOpen(false)}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                    className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
                   >
                     <User className="w-4 h-4 text-slate-400" />
                     <span>My Profile</span>
@@ -168,10 +170,19 @@ export default function Navbar({
                   <Link
                     to={getChangePasswordPath()}
                     onClick={() => setIsProfileOpen(false)}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                    className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
                   >
                     <KeyRound className="w-4 h-4 text-slate-400" />
                     <span>Change Password</span>
+                  </Link>
+
+                  <Link
+                    to={getSettingsPath()}
+                    onClick={() => setIsProfileOpen(false)}
+                    className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                  >
+                    <Settings className="w-4 h-4 text-slate-400" />
+                    <span>Account Settings</span>
                   </Link>
                 </div>
 
@@ -182,7 +193,7 @@ export default function Navbar({
                       if (onLogout) onLogout();
                     }}
                     type="button"
-                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-rose-600 hover:bg-rose-50 transition-colors"
+                    className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-rose-600 hover:bg-rose-50 transition-colors"
                   >
                     <LogOut className="w-4 h-4 text-rose-500" />
                     <span>Logout</span>
