@@ -23,9 +23,6 @@ import {
   BookOpenCheck
 } from 'lucide-react';
 
-/**
- * Categorized Navigation configuration by user role
- */
 const CATEGORIZED_MENU = {
   ADMIN: [
     {
@@ -138,7 +135,6 @@ export default function Sidebar({
         isCollapsed ? 'w-[76px]' : 'w-[250px]'
       }`}
     >
-      {/* Top Section: Logo & Toggle */}
       <div className="flex flex-col flex-1 min-h-0">
         <div className="flex items-center justify-between h-16 px-4 border-b border-slate-800/80 shrink-0">
           <div className="flex items-center gap-3 overflow-hidden">
@@ -173,7 +169,6 @@ export default function Sidebar({
           </button>
         </div>
 
-        {/* Navigation Categories */}
         <nav className="flex-1 overflow-y-auto px-3 py-3 space-y-4 sidebar-scroll">
           {menuSections.map((group) => (
             <div key={group.section} className="space-y-1">
@@ -197,9 +192,9 @@ export default function Sidebar({
                     to={item.path}
                     className={({ isActive: isLinkActive }) => {
                       const active = isActive || isLinkActive;
-                      return `group relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
+                      return `group relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-150 ${
                         active
-                          ? 'bg-[#2563EB] text-white font-semibold shadow-md shadow-blue-600/30 overflow-hidden'
+                          ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25'
                           : 'text-slate-400 hover:bg-slate-800/70 hover:text-slate-100'
                       }`;
                     }}
@@ -209,12 +204,12 @@ export default function Sidebar({
                       return (
                         <>
                           {active && (
-                            <span className="absolute left-0 top-2 bottom-2 w-1 bg-white rounded-r-full shadow-sm" />
+                            <span className="absolute left-0 top-1.5 bottom-1.5 w-1.5 bg-white rounded-r-full shadow-sm" />
                           )}
 
                           <ItemIcon
                             className={`w-5 h-5 shrink-0 transition-transform duration-200 ${
-                              active ? 'text-white' : 'text-slate-400 group-hover:text-white group-hover:scale-105'
+                              active ? 'text-white scale-105' : 'text-slate-400 group-hover:text-white group-hover:scale-105'
                             }`}
                           />
 
@@ -238,7 +233,6 @@ export default function Sidebar({
         </nav>
       </div>
 
-      {/* Bottom Section */}
       <div className="p-3 border-t border-slate-800/80 bg-slate-950/50 space-y-2">
         <div className={`flex items-center gap-3 px-2 py-1.5 rounded-xl ${isCollapsed ? 'justify-center' : ''}`}>
           <div className="relative flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-bold text-sm shrink-0 shadow-md">
