@@ -8,7 +8,12 @@ import {
   Code2,
   Database,
   Cpu,
-  Network
+  Network,
+  UserPlus,
+  ClipboardCheck,
+  Award,
+  FileCheck2,
+  Calendar
 } from 'lucide-react';
 
 /**
@@ -112,7 +117,7 @@ export const dashboardData = {
       roomNumber: 'D302 (Lab 2)',
       startTime: '09:00 AM',
       endTime: '11:00 AM',
-      status: 'ONGOING', // 'ONGOING' | 'UPCOMING' | 'COMPLETED'
+      status: 'ONGOING',
       icon: Cpu,
       iconBg: 'bg-blue-50 text-blue-600 border-blue-100'
     },
@@ -160,6 +165,69 @@ export const dashboardData = {
       status: 'UPCOMING',
       icon: Network,
       iconBg: 'bg-purple-50 text-purple-600 border-purple-100'
+    }
+  ],
+
+  recentActivities: [
+    {
+      id: 'act-1',
+      title: 'New Student Admitted',
+      description: 'Prasad Kumar Rauta registered in MCA course. Reg No: 25061011510037 auto-generated.',
+      user: 'Admin',
+      module: 'Students',
+      time: '12 mins ago',
+      status: 'SUCCESS',
+      icon: Users,
+      iconBg: 'bg-emerald-500 text-white shadow-emerald-500/30',
+      badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200'
+    },
+    {
+      id: 'act-2',
+      title: 'Period Attendance Submitted',
+      description: 'Operating Systems Laboratory (MCA01007) attendance marked by Dr. Satya Prakash Sahoo.',
+      user: 'Dr. Satya Prakash Sahoo',
+      module: 'Attendance',
+      time: '35 mins ago',
+      status: 'COMPLETED',
+      icon: ClipboardCheck,
+      iconBg: 'bg-blue-500 text-white shadow-blue-500/30',
+      badgeBg: 'bg-blue-50 text-blue-700 border-blue-200'
+    },
+    {
+      id: 'act-3',
+      title: 'Bulk Exam Results Published',
+      description: 'Semester 1 exam results uploaded via Excel template and published with email notifications sent.',
+      user: 'Admin',
+      module: 'Results',
+      time: '1 hour ago',
+      status: 'PUBLISHED',
+      icon: Award,
+      iconBg: 'bg-amber-500 text-white shadow-amber-500/30',
+      badgeBg: 'bg-amber-50 text-amber-700 border-amber-200'
+    },
+    {
+      id: 'act-4',
+      title: 'New Faculty Registered',
+      description: 'Kishore Kumar Sahu added to Computer Science & Engg department. First-time login sent via email.',
+      user: 'Admin',
+      module: 'Teachers',
+      time: '2 hours ago',
+      status: 'SUCCESS',
+      icon: UserPlus,
+      iconBg: 'bg-cyan-500 text-white shadow-cyan-500/30',
+      badgeBg: 'bg-cyan-50 text-cyan-700 border-cyan-200'
+    },
+    {
+      id: 'act-5',
+      title: 'Classroom Timetable Updated',
+      description: 'Room D302 assigned to MCA 1st Year Sec A for Tuesday period slots.',
+      user: 'Admin',
+      module: 'Schedule',
+      time: '3 hours ago',
+      status: 'UPDATED',
+      icon: Calendar,
+      iconBg: 'bg-indigo-500 text-white shadow-indigo-500/30',
+      badgeBg: 'bg-indigo-50 text-indigo-700 border-indigo-200'
     }
   ]
 };
