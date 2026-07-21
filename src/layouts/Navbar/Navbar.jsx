@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Menu,
   Bell,
@@ -15,48 +15,28 @@ import {
 import './Navbar.css';
 
 /**
- * Role badge configurations
+ * Role badge configurations matching Sidebar labels exactly
  */
 const ROLE_CONFIG = {
-  ADMIN: { label: 'Admin', badgeBg: 'bg-blue-50 text-blue-700 border-blue-200', icon: ShieldCheck },
-  TEACHER: { label: 'Teacher', badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: UserCheck2 },
+  ADMIN: { label: 'Administrator', badgeBg: 'bg-blue-50 text-blue-700 border-blue-200', icon: ShieldCheck },
+  TEACHER: { label: 'Faculty Member', badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: UserCheck2 },
   STUDENT: { label: 'Student', badgeBg: 'bg-purple-50 text-purple-700 border-purple-200', icon: BookOpenCheck }
 };
 
 /**
- * Route path to Title and Breadcrumb mapping helper
- */
-const getPageMeta = (pathname) => {
-  const segments = pathname.split('/').filter(Boolean);
-  if (segments.length === 0) return { title: 'Dashboard', breadcrumbs: ['Home', 'Dashboard'] };
-
-  const formattedSegments = segments.map(
-    (segment) => segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ')
-  );
-
-  const title = formattedSegments[formattedSegments.length - 1];
-  return {
-    title,
-    breadcrumbs: formattedSegments
-  };
-};
-
-/**
- * Navbar Component
+ * Enhanced Navbar Component
  */
 export default function Navbar({
   role = 'ADMIN',
   user = { name: 'Monalisa Jena', email: 'monalisa@vssut.ac.in', regNo: '2406151037' },
+  unreadCount = 3,
   onToggleMobileSidebar,
   onLogout
 }) {
-  const location = useLocation();
-  const navigate = useNavigate();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const { title, breadcrumbs } = getPageMeta(location.pathname);
   const roleMeta = ROLE_CONFIG[role?.toUpperCase()] || ROLE_CONFIG.ADMIN;
   const RoleIcon = roleMeta.icon;
 
@@ -76,53 +56,36 @@ export default function Navbar({
   const getChangePasswordPath = () => `/${role.toLowerCase()}/profile?tab=password`;
 
   return (
-    <header className="sticky top-0 z-20 bg-white border-b border-slate-200 shadow-xs select-none">
-      <div className="flex items-center justify-between h-16 px-4 md:px-6">
+    <header className="sticky top-0 z-20 bg-white border-b border-slate-200/80 shadow-xs select-none">
+      <div className="flex items-center justify-between h-[72px] px-4 md:px-6">
         
-        {/* Left Side: Mobile Menu Button & Breadcrumbs / Title */}
-        <div className="flex items-center gap-3">
+        {/* Left Side: Mobile Menu Button & Global Search */}
+        <div className="flex items-center gap-4 flex-1">
           {/* Mobile Hamburger Menu Toggle */}
           <button
             onClick={onToggleMobileSidebar}
             type="button"
-            className="p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors md:hidden"
+            className="p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors md:hidden border border-slate-200/60"
             aria-label="Open sidebar menu"
           >
             <Menu className="w-6 h-6" />
           </button>
 
-          {/* Breadcrumbs and Page Title */}
-          <div className="flex flex-col">
-            <nav aria-label="Breadcrumb" className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-slate-400">
-              {breadcrumbs.map((crumb, idx) => (
-                <React.Fragment key={crumb}>
-                  {idx > 0 && <span className="text-slate-300">/</span>}
-                  <span className={idx === breadcrumbs.length - 1 ? 'text-slate-600 font-semibold' : ''}>
-                    {crumb}
-                  </span>
-                </React.Fragment>
-              ))}
-            </nav>
-            <h1 className="text-lg font-bold text-slate-800 tracking-tight leading-none mt-0.5">
-              {title}
-            </h1>
+          {/* Quick Search Input (Desktop Width 350px) */}
+          <div className="hidden sm:flex items-center relative w-72 md:w-[350px]">
+            <Search className="w-4 h-4 absolute left-3.5 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search courses, subjects, students, teachers..."
+              className="w-full pl-10 pr-4 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 transition-all text-slate-800 placeholder-slate-500 font-medium"
+            />
           </div>
         </div>
 
-        {/* Right Side: Search, Notifications, User Profile */}
+        {/* Right Side: Notifications & User Profile */}
         <div className="flex items-center gap-3 md:gap-4" ref={dropdownRef}>
           
-          {/* Quick Search Input (Desktop) */}
-          <div className="hidden lg:flex items-center relative w-64">
-            <Search className="w-4 h-4 absolute left-3 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search subjects, students..."
-              className="w-full pl-9 pr-4 py-1.5 text-xs rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-700 placeholder-slate-400"
-            />
-          </div>
-
-          {/* Notification Button */}
+          {/* Notification Button with Counter Badge */}
           <div className="relative">
             <button
               onClick={() => {
@@ -130,25 +93,42 @@ export default function Navbar({
                 setIsProfileOpen(false);
               }}
               type="button"
-              className="relative p-2 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors"
+              className="relative p-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors border border-transparent hover:border-slate-200"
               title="Notifications"
             >
               <Bell className="w-5 h-5" />
-              {/* Notification Badge */}
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-blue-600 rounded-full ring-2 ring-white animate-pulse" />
+              {unreadCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[10px] font-bold text-white bg-blue-600 rounded-full ring-2 ring-white shadow-xs">
+                  {unreadCount}
+                </span>
+              )}
             </button>
 
             {/* Notifications Dropdown Window */}
             {isNotificationsOpen && (
               <div className="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-slate-100 p-4 space-y-3 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-                  <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">Notifications</span>
-                  <span className="text-[10px] font-bold px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full">New</span>
+                <div className="flex items-center justify-between pb-2.5 border-b border-slate-100">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">Notifications</span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full">
+                      {unreadCount} New
+                    </span>
+                  </div>
+                  <button type="button" className="text-[11px] font-semibold text-blue-600 hover:underline">
+                    Mark all read
+                  </button>
                 </div>
+
                 <div className="space-y-2 text-xs">
-                  <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
-                    <p className="font-semibold text-slate-700">Welcome to TrackMyClass ERP!</p>
-                    <p className="text-slate-400 text-[11px] mt-0.5">Academic schedule updated for Semester 1.</p>
+                  <div className="p-3 rounded-xl bg-blue-50/50 border border-blue-100/60">
+                    <p className="font-semibold text-slate-800">Academic Schedule Updated</p>
+                    <p className="text-slate-500 text-[11px] mt-0.5">Semester timetable slots updated by Admin.</p>
+                    <span className="text-[10px] text-slate-400 mt-1 block">10 mins ago</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
+                    <p className="font-semibold text-slate-800">Result Draft Saved</p>
+                    <p className="text-slate-500 text-[11px] mt-0.5">MCA 1st semester exam marks pending review.</p>
+                    <span className="text-[10px] text-slate-400 mt-1 block">1 hour ago</span>
                   </div>
                 </div>
               </div>
@@ -163,24 +143,21 @@ export default function Navbar({
                 setIsNotificationsOpen(false);
               }}
               type="button"
-              className="flex items-center gap-2.5 p-1.5 pr-2.5 rounded-2xl hover:bg-slate-100/80 transition-colors group border border-transparent hover:border-slate-200"
+              className="flex items-center gap-3 p-1.5 pr-3 rounded-2xl hover:bg-slate-100/80 transition-colors group border border-transparent hover:border-slate-200"
             >
-              {/* Avatar */}
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold text-xs shadow-sm">
+              {/* Avatar Circle */}
+              <div className="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold text-sm shadow-md shrink-0">
                 {user?.name ? user.name.charAt(0) : 'U'}
               </div>
 
-              {/* User Name & Role (Tablet & Desktop) */}
+              {/* User Name & Full Role Designation */}
               <div className="hidden sm:flex flex-col text-left leading-tight">
                 <span className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
                   {user?.name || 'Monalisa Jena'}
                 </span>
-                <div className="flex items-center gap-1">
-                  <RoleIcon className="w-3 h-3 text-slate-400" />
-                  <span className="text-[10px] font-semibold text-slate-500">
-                    {roleMeta.label}
-                  </span>
-                </div>
+                <span className="text-[11px] font-medium text-slate-500">
+                  {roleMeta.label}
+                </span>
               </div>
 
               <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${isProfileOpen ? 'rotate-180' : ''}`} />
@@ -188,24 +165,24 @@ export default function Navbar({
 
             {/* Profile Dropdown Menu */}
             {isProfileOpen && (
-              <div className="absolute right-0 mt-2 w-60 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 
                 {/* User Summary Header */}
-                <div className="px-4 py-3 border-b border-slate-100 bg-slate-50/50">
+                <div className="px-4 py-3 border-b border-slate-100 bg-slate-50/60">
                   <p className="text-xs font-bold text-slate-800 truncate">{user?.name || 'Monalisa Jena'}</p>
-                  <p className="text-[11px] text-slate-500 truncate">{user?.email || 'monalisa@vssut.ac.in'}</p>
-                  <div className="mt-2 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md border text-[10px] font-bold uppercase tracking-wider ${roleMeta.badgeBg}">
+                  <p className="text-[11px] text-slate-500 truncate mt-0.5">{user?.email || 'monalisa@vssut.ac.in'}</p>
+                  <div className={`mt-2.5 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border text-[10px] font-bold ${roleMeta.badgeBg}`}>
                     <RoleIcon className="w-3 h-3" />
                     <span>{roleMeta.label}</span>
                   </div>
                 </div>
 
-                {/* Dropdown Links */}
-                <div className="p-1 space-y-0.5">
+                {/* Profile Links */}
+                <div className="p-1.5 space-y-0.5">
                   <Link
                     to={getProfilePath()}
                     onClick={() => setIsProfileOpen(false)}
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
                   >
                     <User className="w-4 h-4 text-slate-400" />
                     <span>My Profile</span>
@@ -214,22 +191,22 @@ export default function Navbar({
                   <Link
                     to={getChangePasswordPath()}
                     onClick={() => setIsProfileOpen(false)}
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
                   >
                     <KeyRound className="w-4 h-4 text-slate-400" />
                     <span>Change Password</span>
                   </Link>
                 </div>
 
-                {/* Divider & Logout */}
-                <div className="pt-1 mt-1 border-t border-slate-100 px-1">
+                {/* Logout Action */}
+                <div className="pt-1.5 mt-1 border-t border-slate-100 px-1.5">
                   <button
                     onClick={() => {
                       setIsProfileOpen(false);
                       if (onLogout) onLogout();
                     }}
                     type="button"
-                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-rose-600 hover:bg-rose-50 transition-colors"
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-rose-600 hover:bg-rose-50 transition-colors"
                   >
                     <LogOut className="w-4 h-4 text-rose-500" />
                     <span>Logout</span>
