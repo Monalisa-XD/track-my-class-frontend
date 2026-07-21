@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ClipboardCheck, ArrowRight, UserCheck, UserX, Clock, AlertTriangle } from 'lucide-react';
+import { ClipboardCheck, ArrowRight, UserCheck, UserX, Clock, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import './AttendanceOverview.css';
 
 /**
@@ -20,12 +20,24 @@ export default function AttendanceOverview({ data }) {
     absentPercentage = 9.0,
     lateCount = 14,
     latePercentage = 3.4,
-    lastUpdated = 'Today at 04:30 PM',
-    targetThreshold = 75.0,
-    status = 'Healthy'
+    lastUpdated = 'Last Updated: Today, 04:30 PM',
+    targetThreshold = 75.0
   } = data || {};
 
-  const isLowAttendance = overallPercentage < targetThreshold;
+  // Status Badge Logic: Green (Excellent >= 85%), Amber (Average 75-84%), Red (Poor < 75%)
+  let statusText = 'Excellent Attendance';
+  let statusBadgeClass = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+  let StatusIcon = CheckCircle2;
+
+  if (overallPercentage < targetThreshold) {
+    statusText = `Poor Attendance (<${targetThreshold}%)`;
+    statusBadgeClass = 'bg-rose-50 text-rose-700 border-rose-200';
+    StatusIcon = AlertTriangle;
+  } else if (overallPercentage < 85) {
+    statusText = 'Average Attendance';
+    statusBadgeClass = 'bg-amber-50 text-amber-700 border-amber-200';
+    StatusIcon = Clock;
+  }
 
   return (
     <div className="bg-white p-5 md:p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-5 select-none">
@@ -41,12 +53,12 @@ export default function AttendanceOverview({ data }) {
               Attendance Overview
             </h3>
             <p className="text-xs text-slate-500 font-medium">
-              Daily period-wise student attendance breakdown • <span className="text-slate-400">{lastUpdated}</span>
+              Daily period-wise student attendance breakdown • <span className="text-slate-400 font-semibold">{lastUpdated}</span>
             </p>
           </div>
         </div>
 
-        {/* Navigation Link */}
+        {/* Navigation Link to Attendance Module */}
         <Link
           to="/admin/attendance"
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-700 hover:underline transition-all group"
@@ -63,17 +75,12 @@ export default function AttendanceOverview({ data }) {
         <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/60 flex flex-col justify-between space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-              Overall Rate
+              Overall Attendance
             </span>
-            {isLowAttendance ? (
-              <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200">
-                <AlertTriangle className="w-3 h-3" /> Warning (&lt;{targetThreshold}%)
-              </span>
-            ) : (
-              <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
-                {status} (&ge;{targetThreshold}%)
-              </span>
-            )}
+            <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${statusBadgeClass}`}>
+              <StatusIcon className="w-3 h-3" />
+              <span>{statusText}</span>
+            </span>
           </div>
 
           <div>
@@ -82,7 +89,7 @@ export default function AttendanceOverview({ data }) {
                 {overallPercentage}%
               </span>
               <span className="text-xs text-slate-500 font-medium">
-                of {totalStudentsToday} students
+                {totalStudentsToday} Total Students
               </span>
             </div>
 
