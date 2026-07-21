@@ -3,37 +3,30 @@ import { Link } from 'react-router-dom';
 import { Calendar, ArrowRight, Clock, MapPin, UserCheck, BookOpen } from 'lucide-react';
 import './TodaySchedule.css';
 
-/**
- * Status badge configurations for timetable slots
- */
 const STATUS_CONFIG = {
-  ONGOING: { label: 'Ongoing', badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200', isLive: true },
-  UPCOMING: { label: 'Upcoming', badgeBg: 'bg-blue-50 text-blue-700 border-blue-200', isLive: false },
+  ONGOING: { label: 'Ongoing', badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200 shadow-emerald-500/10', isLive: true },
+  UPCOMING: { label: 'Upcoming', badgeBg: 'bg-blue-50 text-blue-700 border-blue-200 shadow-blue-500/10', isLive: false },
   COMPLETED: { label: 'Completed', badgeBg: 'bg-slate-100 text-slate-600 border-slate-200', isLive: false }
 };
 
-/**
- * TodaySchedule Component
- * Renders a list of scheduled classes for today with teacher assignments, time slots, and room numbers.
- * 
- * @param {Object} props
- * @param {Array} props.schedule - Array of class schedule objects
- */
 export default function TodaySchedule({ schedule = [] }) {
   if (!schedule || schedule.length === 0) return null;
 
   return (
-    <div className="bg-white p-5 md:p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-5 select-none">
+    <div className="relative overflow-hidden bg-white p-5 md:p-6 rounded-2xl border border-slate-200/80 shadow-ambient inner-highlight transition-all duration-300 hover:shadow-ambient-hover hover:border-slate-300 select-none space-y-5">
       
+      {/* Inner Top Highlight */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent opacity-60" />
+
       {/* Header Row */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-4 border-b border-slate-100">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/25 flex items-center justify-center shrink-0">
             <Calendar className="w-5 h-5" />
           </div>
           <div>
             <h3 className="text-base font-bold text-slate-800 tracking-tight">
-              Today's Class Schedule
+              Today's Schedule
             </h3>
             <p className="text-xs text-slate-500 font-medium">
               Scheduled timetable slots, assigned faculty, and classrooms for today
@@ -51,21 +44,26 @@ export default function TodaySchedule({ schedule = [] }) {
         </Link>
       </div>
 
-      {/* Schedule Items List */}
-      <div className="grid grid-cols-1 gap-3">
+      {/* Schedule Items List with 8px Increased Gap */}
+      <div className="grid grid-cols-1 gap-4">
         {schedule.map((item) => {
           const IconComp = item.icon || BookOpen;
+          const isOngoing = item.status?.toUpperCase() === 'ONGOING';
           const statusMeta = STATUS_CONFIG[item.status?.toUpperCase()] || STATUS_CONFIG.UPCOMING;
 
           return (
             <div
               key={item.id || item.subjectCode}
-              className="p-4 rounded-xl bg-slate-50/70 border border-slate-200/60 hover:border-slate-300 hover:bg-slate-50 transition-all duration-150 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+              className={`group relative p-4 rounded-xl border transition-all duration-200 hover:-translate-y-0.5 flex flex-col md:flex-row md:items-center md:justify-between gap-4 ${
+                isOngoing
+                  ? 'bg-emerald-50/20 border-emerald-200/80 hover:bg-emerald-50/40 hover:border-emerald-300 shadow-xs'
+                  : 'bg-slate-50/70 border-slate-200/60 hover:bg-white hover:border-blue-200/80 hover:shadow-md hover:shadow-blue-500/5'
+              }`}
             >
               {/* Left Column: Subject Icon & Details */}
               <div className="flex items-start gap-3.5 flex-1 min-w-0">
                 <div
-                  className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border shadow-xs ${item.iconBg || 'bg-blue-50 text-blue-600 border-blue-100'}`}
+                  className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border shadow-xs transition-transform duration-200 group-hover:scale-105 ${item.iconBg || 'bg-blue-50 text-blue-600 border-blue-100'}`}
                 >
                   <IconComp className="w-5.5 h-5.5" />
                 </div>
@@ -80,7 +78,7 @@ export default function TodaySchedule({ schedule = [] }) {
                     </span>
                   </div>
 
-                  <h4 className="text-sm font-bold text-slate-800 tracking-tight truncate">
+                  <h4 className="text-sm font-bold text-slate-800 tracking-tight truncate group-hover:text-blue-600 transition-colors">
                     {item.subjectName}
                   </h4>
 
@@ -91,19 +89,25 @@ export default function TodaySchedule({ schedule = [] }) {
                 </div>
               </div>
 
-              {/* Center/Right Column: Time & Room Details */}
-              <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-600 pt-2 md:pt-0 border-t md:border-t-0 border-slate-200/50">
+              {/* Right Column: Time & Room Details */}
+              <div className="flex flex-wrap items-center gap-3 md:gap-4 text-xs font-medium text-slate-600 pt-2 md:pt-0 border-t md:border-t-0 border-slate-200/50">
                 
-                {/* Time Slot */}
-                <div className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-slate-200/60 shadow-2xs">
-                  <Clock className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                  <span className="font-semibold text-slate-700">
+                {/* Time Slot (Stronger Accent for Ongoing Class) */}
+                <div
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border shadow-2xs font-semibold ${
+                    isOngoing
+                      ? 'bg-emerald-100/80 border-emerald-300 text-emerald-900 shadow-sm'
+                      : 'bg-white border-slate-200/70 text-slate-700'
+                  }`}
+                >
+                  <Clock className={`w-3.5 h-3.5 shrink-0 ${isOngoing ? 'text-emerald-700' : 'text-blue-600'}`} />
+                  <span>
                     {item.startTime} - {item.endTime}
                   </span>
                 </div>
 
                 {/* Room Number */}
-                <div className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-slate-200/60 shadow-2xs">
+                <div className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-slate-200/70 shadow-2xs">
                   <MapPin className="w-3.5 h-3.5 text-rose-500 shrink-0" />
                   <span className="font-semibold text-slate-700">
                     {item.roomNumber}
@@ -112,7 +116,7 @@ export default function TodaySchedule({ schedule = [] }) {
 
                 {/* Status Badge */}
                 <div className="shrink-0">
-                  <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full border ${statusMeta.badgeBg}`}>
+                  <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full border shadow-2xs ${statusMeta.badgeBg}`}>
                     {statusMeta.isLive && (
                       <span className="relative flex h-2 w-2">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
