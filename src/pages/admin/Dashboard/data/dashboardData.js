@@ -81,5 +81,19 @@ export const dashboardData = {
       bgColor: 'bg-amber-50 text-amber-600 border-amber-100',
       iconBg: 'bg-amber-600 text-white shadow-amber-500/30'
     }
-  ]
+  ],
+
+  attendanceSummary: {
+    overallPercentage: 87.5,
+    totalStudentsToday: 420,
+    presentCount: 368,
+    presentPercentage: 87.6,
+    absentCount: 38,
+    absentPercentage: 9.0,
+    lateCount: 14,
+    latePercentage: 3.4,
+    lastUpdated: 'Today at 04:30 PM',
+    targetThreshold: 75.0, // Project requirement: <75% triggers warning
+    status: 'Healthy'
+  }
 };
