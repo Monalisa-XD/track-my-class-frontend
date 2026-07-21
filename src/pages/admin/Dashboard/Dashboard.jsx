@@ -6,7 +6,6 @@ import './Dashboard.css';
 
 /**
  * Admin Dashboard Page Component
- * Summarizes university academic statistics, metrics, and operations.
  */
 export default function Dashboard() {
   const { welcome, statistics } = dashboardData;
@@ -22,8 +21,8 @@ export default function Dashboard() {
           <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500">
             Academic Operations Summary
           </h3>
-          <span className="text-xs font-semibold text-blue-600 hover:underline cursor-pointer">
-            Live Overview
+          <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
+            Academic Year 2025–26
           </span>
         </div>
 
