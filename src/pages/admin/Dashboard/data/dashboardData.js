@@ -92,8 +92,7 @@ export const dashboardData = {
     absentPercentage: 9.0,
     lateCount: 14,
     latePercentage: 3.4,
-    lastUpdated: 'Today at 04:30 PM',
-    targetThreshold: 75.0, // Project requirement: <75% triggers warning
-    status: 'Healthy'
+    lastUpdated: 'Last Updated: Today, 04:30 PM',
+    targetThreshold: 75.0
   }
 };
