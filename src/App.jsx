@@ -2,22 +2,25 @@ import React, { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Sidebar from './layouts/Sidebar';
 import Navbar from './layouts/Navbar';
+import Header from './layouts/Header';
 
 function AppContent() {
-  // Production placeholder: Simulated authenticated user state returned after API login
   const [currentUser] = useState({
     name: 'Monalisa Jena',
     email: 'monalisa@vssut.ac.in',
     regNo: '2406151037',
-    role: 'ADMIN' // Options: 'ADMIN' | 'TEACHER' | 'STUDENT' (automatically determined on auth)
+    role: 'ADMIN' // Options: 'ADMIN' | 'TEACHER' | 'STUDENT'
   });
 
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   const handleLogout = () => {
-    // Will integrate with authService.logout() when connecting API
     console.log('Logging out user session...');
+  };
+
+  const handleHeaderAction = (actionKey) => {
+    alert(`Triggered action: ${actionKey}`);
   };
 
   return (
@@ -51,9 +54,9 @@ function AppContent() {
         </div>
       )}
 
-      {/* Main Content Area */}
+      {/* Main Layout Container */}
       <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
-        {/* Top Navbar */}
+        {/* Navbar */}
         <Navbar
           role={currentUser.role}
           user={currentUser}
@@ -61,15 +64,21 @@ function AppContent() {
           onLogout={handleLogout}
         />
 
-        {/* Main View Container */}
+        {/* Dynamic Page Header */}
+        <Header
+          role={currentUser.role}
+          onActionClick={handleHeaderAction}
+        />
+
+        {/* Page Content View */}
         <main className="flex-1 overflow-y-auto p-6 bg-[#F8FAFC]">
           <div className="max-w-7xl mx-auto space-y-6">
             <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs">
-              <h2 className="text-xl font-bold text-slate-800 tracking-tight">
-                Academic ERP Overview
-              </h2>
+              <h3 className="text-lg font-bold text-slate-800 tracking-tight">
+                Header Component Verification
+              </h3>
               <p className="text-slate-500 text-sm mt-1">
-                Navbar and Sidebar successfully integrated with dynamic role-based rendering.
+                Notice how the Header automatically displays the breadcrumbs (<span className="text-blue-600 font-medium">Home &gt; Admin &gt; Dashboard</span>), page title, module description, and role-specific action button.
               </p>
             </div>
           </div>
