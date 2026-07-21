@@ -12,8 +12,9 @@ import {
   UserPlus,
   ClipboardCheck,
   Award,
-  FileCheck2,
-  Calendar
+  Calendar,
+  Layers,
+  Sparkles
 } from 'lucide-react';
 
 /**
@@ -175,7 +176,7 @@ export const dashboardData = {
       description: 'Prasad Kumar Rauta registered in MCA course. Reg No: 25061011510037 auto-generated.',
       user: 'Admin',
       module: 'Students',
-      time: '12 mins ago',
+      time: 'Today • 12 mins ago',
       status: 'SUCCESS',
       icon: Users,
       iconBg: 'bg-emerald-500 text-white shadow-emerald-500/30',
@@ -187,7 +188,7 @@ export const dashboardData = {
       description: 'Operating Systems Laboratory (MCA01007) attendance marked by Dr. Satya Prakash Sahoo.',
       user: 'Dr. Satya Prakash Sahoo',
       module: 'Attendance',
-      time: '35 mins ago',
+      time: 'Today • 35 mins ago',
       status: 'COMPLETED',
       icon: ClipboardCheck,
       iconBg: 'bg-blue-500 text-white shadow-blue-500/30',
@@ -196,10 +197,10 @@ export const dashboardData = {
     {
       id: 'act-3',
       title: 'Bulk Exam Results Published',
-      description: 'Semester 1 exam results uploaded via Excel template and published with email notifications sent.',
+      description: 'Semester 1 exam marks uploaded via Excel (.xlsx) and official results declared with email notifications.',
       user: 'Admin',
       module: 'Results',
-      time: '1 hour ago',
+      time: 'Today • 1 hour ago',
       status: 'PUBLISHED',
       icon: Award,
       iconBg: 'bg-amber-500 text-white shadow-amber-500/30',
@@ -208,10 +209,10 @@ export const dashboardData = {
     {
       id: 'act-4',
       title: 'New Faculty Registered',
-      description: 'Kishore Kumar Sahu added to Computer Science & Engg department. First-time login sent via email.',
+      description: 'Kishore Kumar Sahu added to Computer Science & Engg department. Login instructions emailed.',
       user: 'Admin',
       module: 'Teachers',
-      time: '2 hours ago',
+      time: 'Today • 2 hours ago',
       status: 'SUCCESS',
       icon: UserPlus,
       iconBg: 'bg-cyan-500 text-white shadow-cyan-500/30',
@@ -220,14 +221,38 @@ export const dashboardData = {
     {
       id: 'act-5',
       title: 'Classroom Timetable Updated',
-      description: 'Room D302 assigned to MCA 1st Year Sec A for Tuesday period slots.',
+      description: 'Room D302 assigned to MCA 1st Year Sec A for Tuesday period slots with conflict verification.',
       user: 'Admin',
       module: 'Schedule',
-      time: '3 hours ago',
+      time: 'Today • 3 hours ago',
       status: 'UPDATED',
       icon: Calendar,
       iconBg: 'bg-indigo-500 text-white shadow-indigo-500/30',
       badgeBg: 'bg-indigo-50 text-indigo-700 border-indigo-200'
+    },
+    {
+      id: 'act-6',
+      title: 'New Department Created',
+      description: 'Department of Computer Science & Engineering created with active status and HOD details assigned.',
+      user: 'Admin',
+      module: 'Departments',
+      time: 'Today • 4 hours ago',
+      status: 'SUCCESS',
+      icon: Building2,
+      iconBg: 'bg-blue-600 text-white shadow-blue-500/30',
+      badgeBg: 'bg-blue-50 text-blue-700 border-blue-200'
+    },
+    {
+      id: 'act-7',
+      title: 'New Subject & Syllabus Added',
+      description: 'Database Engineering (MCA01005) 4-credit course subject added with textbook references.',
+      user: 'Admin',
+      module: 'Subjects',
+      time: 'Today • 5 hours ago',
+      status: 'SUCCESS',
+      icon: BookOpen,
+      iconBg: 'bg-purple-500 text-white shadow-purple-500/30',
+      badgeBg: 'bg-purple-50 text-purple-700 border-purple-200'
     }
   ]
 };

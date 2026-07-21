@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Activity, ArrowRight, User, Clock, Shield } from 'lucide-react';
+import { Activity, ArrowRight, User, Clock } from 'lucide-react';
 import './RecentActivities.css';
 
 /**
  * RecentActivities Component
- * Displays a real-time vertical timeline activity feed summarizing system events across ERP modules.
+ * Renders a vertical timeline audit feed summarizing system events across all ERP modules.
  * 
  * @param {Object} props
  * @param {Array} props.activities - Array of activity log objects
@@ -16,7 +15,7 @@ export default function RecentActivities({ activities = [] }) {
   return (
     <div className="relative overflow-hidden bg-white p-5 md:p-6 rounded-2xl border border-slate-200/80 shadow-ambient inner-highlight transition-all duration-300 hover:shadow-ambient-hover hover:border-slate-300 select-none space-y-5">
       
-      {/* Subtle Inner Top Highlight Line */}
+      {/* Inner Top Highlight */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent opacity-60" />
 
       {/* Header Row */}
@@ -27,18 +26,18 @@ export default function RecentActivities({ activities = [] }) {
           </div>
           <div>
             <h3 className="text-base font-bold text-slate-800 tracking-tight">
-              Recent Activities
+              Recent System Activities
             </h3>
             <p className="text-xs text-slate-500 font-medium">
-              Real-time audit log of system events, registrations, and updates
+              Real-time audit log of system events across all academic modules
             </p>
           </div>
         </div>
 
-        {/* Link to Activity Log Page */}
+        {/* Link to Activity Audit Log */}
         <button
           type="button"
-          onClick={() => alert('Viewing full system audit log')}
+          onClick={() => alert('Navigating to full System Audit Log')}
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-700 hover:underline transition-all group"
         >
           <span>View All Activities</span>
@@ -46,8 +45,8 @@ export default function RecentActivities({ activities = [] }) {
         </button>
       </div>
 
-      {/* Vertical Timeline Container */}
-      <div className="relative pl-3 space-y-4 before:absolute before:left-7 before:top-4 before:bottom-4 before:w-0.5 before:bg-slate-200/80">
+      {/* Vertical Timeline Container with Lighter Connector Line */}
+      <div className="relative pl-3 space-y-4 before:absolute before:left-7 before:top-4 before:bottom-4 before:w-0.5 before:bg-slate-200/40">
         {activities.map((act) => {
           const IconComp = act.icon || Activity;
 
@@ -56,7 +55,7 @@ export default function RecentActivities({ activities = [] }) {
               key={act.id || act.title}
               className="relative flex items-start gap-4 group"
             >
-              {/* Timeline Icon Node with Glow */}
+              {/* Timeline Icon Node */}
               <div
                 className={`relative z-10 w-9 h-9 rounded-full flex items-center justify-center shrink-0 shadow-md transition-transform duration-200 group-hover:scale-110 ${act.iconBg || 'bg-blue-600 text-white'}`}
               >
@@ -78,7 +77,7 @@ export default function RecentActivities({ activities = [] }) {
                   </div>
 
                   {/* Status Badge */}
-                  <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border shadow-2xs ${act.badgeBg || 'bg-slate-100 text-slate-600'}`}>
+                  <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border shadow-2xs shrink-0 ${act.badgeBg || 'bg-slate-100 text-slate-600'}`}>
                     {act.status}
                   </span>
                 </div>
@@ -97,12 +96,11 @@ export default function RecentActivities({ activities = [] }) {
 
                   <div className="flex items-center gap-1">
                     <Clock className="w-3 h-3 text-slate-400" />
-                    <span>{act.time}</span>
+                    <span className="font-semibold text-slate-500">{act.time}</span>
                   </div>
                 </div>
 
               </div>
-
             </div>
           );
         })}
