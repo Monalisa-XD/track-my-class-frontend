@@ -61,7 +61,7 @@ export default function Navbar({
     <header className="sticky top-0 z-20 bg-white border-b border-slate-200/80 shadow-xs select-none">
       <div className="flex items-center justify-between h-[72px] px-4 md:px-6">
         
-        {/* Left Side: Mobile Menu Button & Global Search */}
+        {/* Left Side: Mobile Menu Button & Global Search (380px - 400px wide) */}
         <div className="flex items-center gap-4 flex-1">
           {/* Mobile Hamburger Menu Toggle */}
           <button
@@ -73,8 +73,8 @@ export default function Navbar({
             <Menu className="w-6 h-6" />
           </button>
 
-          {/* Quick Search Input */}
-          <div className="hidden sm:flex items-center relative w-72 md:w-[350px]">
+          {/* Quick Search Input (380px on md, 400px on lg) */}
+          <div className="hidden sm:flex items-center relative md:w-[380px] lg:w-[400px]">
             <Search className="w-4 h-4 absolute left-3.5 text-slate-400" />
             <input
               type="text"
@@ -166,8 +166,6 @@ export default function Navbar({
             {/* Profile Dropdown Menu */}
             {isProfileOpen && (
               <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                
-                {/* User Summary Header */}
                 <div className="px-4 py-3 border-b border-slate-100 bg-slate-50/60">
                   <p className="text-xs font-bold text-slate-800 truncate">{user?.name || 'Monalisa Jena'}</p>
                   <p className="text-[11px] text-slate-500 truncate mt-0.5">{user?.email || 'monalisa@vssut.ac.in'}</p>
@@ -177,7 +175,6 @@ export default function Navbar({
                   </div>
                 </div>
 
-                {/* Profile Links */}
                 <div className="p-1.5 space-y-0.5">
                   <Link
                     to={getProfilePath()}
@@ -207,7 +204,6 @@ export default function Navbar({
                   </Link>
                 </div>
 
-                {/* Logout Action */}
                 <div className="pt-1.5 mt-1 border-t border-slate-100 px-1.5">
                   <button
                     onClick={() => {
