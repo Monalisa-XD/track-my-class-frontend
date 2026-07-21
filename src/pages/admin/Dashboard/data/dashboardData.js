@@ -4,7 +4,11 @@ import {
   BookOpen,
   UserCheck,
   Users,
-  School
+  School,
+  Code2,
+  Database,
+  Cpu,
+  Network
 } from 'lucide-react';
 
 /**
@@ -94,5 +98,68 @@ export const dashboardData = {
     latePercentage: 3.4,
     lastUpdated: 'Last Updated: Today, 04:30 PM',
     targetThreshold: 75.0
-  }
+  },
+
+  todaySchedule: [
+    {
+      id: 'sched-101',
+      subjectCode: 'MCA01007',
+      subjectName: 'Operating Systems Laboratory',
+      teacherName: 'Dr. Satya Prakash Sahoo',
+      department: 'Computer Science & Engg',
+      course: 'Master of Computer Application',
+      classSection: 'MCA 1st Year (Sec A)',
+      roomNumber: 'D302 (Lab 2)',
+      startTime: '09:00 AM',
+      endTime: '11:00 AM',
+      status: 'ONGOING', // 'ONGOING' | 'UPCOMING' | 'COMPLETED'
+      icon: Cpu,
+      iconBg: 'bg-blue-50 text-blue-600 border-blue-100'
+    },
+    {
+      id: 'sched-102',
+      subjectCode: 'MCA01003',
+      subjectName: 'Data Structure Using C',
+      teacherName: 'Kishore Kumar Sahu',
+      department: 'Computer Science & Engg',
+      course: 'Master of Computer Application',
+      classSection: 'MCA 1st Year (Sec B)',
+      roomNumber: 'Hall 101',
+      startTime: '11:15 AM',
+      endTime: '01:15 PM',
+      status: 'UPCOMING',
+      icon: Code2,
+      iconBg: 'bg-indigo-50 text-indigo-600 border-indigo-100'
+    },
+    {
+      id: 'sched-103',
+      subjectCode: 'MCA01005',
+      subjectName: 'Database Engineering',
+      teacherName: 'Santosh Kumar Mohapatra',
+      department: 'Computer Science & Engg',
+      course: 'Master of Computer Application',
+      classSection: 'MCA 1st Year (Sec A)',
+      roomNumber: 'D304',
+      startTime: '02:00 PM',
+      endTime: '04:00 PM',
+      status: 'UPCOMING',
+      icon: Database,
+      iconBg: 'bg-emerald-50 text-emerald-600 border-emerald-100'
+    },
+    {
+      id: 'sched-104',
+      subjectCode: 'MCA02001',
+      subjectName: 'Computer Networks',
+      teacherName: 'Rockey Masudu Gouda',
+      department: 'Computer Science & Engg',
+      course: 'Master of Computer Application',
+      classSection: 'MCA 2nd Year (Sec A)',
+      roomNumber: 'Hall 202',
+      startTime: '04:15 PM',
+      endTime: '05:45 PM',
+      status: 'UPCOMING',
+      icon: Network,
+      iconBg: 'bg-purple-50 text-purple-600 border-purple-100'
+    }
+  ]
 };
