@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
+import AdminDashboard from './pages/admin/Dashboard';
 
 /**
- * Placeholder Page Component for testing MainLayout & Router Outlet
+ * Placeholder Page Component for other sub-routes until implemented
  */
 function PlaceholderPage({ title, details }) {
   return (
     <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-3">
       <h3 className="text-lg font-bold text-slate-800 tracking-tight">{title}</h3>
       <p className="text-slate-500 text-sm">{details}</p>
-      <div className="pt-4 border-t border-slate-100 flex items-center gap-3">
-        <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-bold">
-          Ready for Module Implementation
-        </span>
-      </div>
     </div>
   );
 }
@@ -53,7 +49,7 @@ export default function App() {
           <Route path="/" element={<Navigate to={`/${currentUser.role.toLowerCase()}/dashboard`} replace />} />
 
           {/* Admin Routes */}
-          <Route path="/admin/dashboard" element={<PlaceholderPage title="Admin Dashboard" details="Overview of university metrics, total students, faculty, and quick actions." />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/departments" element={<PlaceholderPage title="Department Management" details="Add, edit, deactivate departments and assign HOD contact details." />} />
           <Route path="/admin/courses" element={<PlaceholderPage title="Course Management" details="Manage degree programs, course codes, duration, and fees." />} />
           <Route path="/admin/subjects" element={<PlaceholderPage title="Subject Management" details="Manage subjects, semester allocations, and reference textbooks." />} />
