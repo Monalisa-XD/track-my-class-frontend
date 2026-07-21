@@ -122,9 +122,6 @@ const ROLE_DETAILS = {
   STUDENT: { label: 'Student', badgeBg: 'bg-purple-500/20 text-purple-400 border-purple-500/30' }
 };
 
-/**
- * Enhanced Sidebar Component
- */
 export default function Sidebar({
   role = 'ADMIN',
   isCollapsed = false,
@@ -146,12 +143,10 @@ export default function Sidebar({
       <div className="flex flex-col flex-1 min-h-0">
         <div className="flex items-center justify-between h-16 px-4 border-b border-slate-800/80 shrink-0">
           <div className="flex items-center gap-3 overflow-hidden">
-            {/* Logo Icon */}
             <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-600/30 shrink-0">
               <GraduationCap className="w-6 h-6" />
             </div>
 
-            {/* Logo Text */}
             {!isCollapsed && (
               <div className="flex flex-col leading-none">
                 <span className="text-xl font-extrabold text-white tracking-tight">
@@ -164,7 +159,6 @@ export default function Sidebar({
             )}
           </div>
 
-          {/* Collapse Toggle Button */}
           <button
             onClick={onToggleCollapse}
             type="button"
@@ -184,7 +178,6 @@ export default function Sidebar({
         <nav className="flex-1 overflow-y-auto px-3 py-3 space-y-4 sidebar-scroll">
           {menuSections.map((group) => (
             <div key={group.section} className="space-y-1">
-              {/* Category Header */}
               {!isCollapsed ? (
                 <div className="px-3 pt-2 pb-1 text-[11px] font-bold tracking-wider text-slate-500 uppercase">
                   {group.section}
@@ -193,7 +186,6 @@ export default function Sidebar({
                 <div className="my-2 border-t border-slate-800/60" />
               )}
 
-              {/* Items in Category */}
               {group.items.map((item) => {
                 const ItemIcon = item.icon;
                 const isActive =
@@ -206,9 +198,9 @@ export default function Sidebar({
                     to={item.path}
                     className={({ isActive: isLinkActive }) => {
                       const active = isActive || isLinkActive;
-                      return `group relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
+                      return `group relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-150 ${
                         active
-                          ? 'bg-[#2563EB] text-white font-semibold shadow-md shadow-blue-600/30 overflow-hidden'
+                          ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25'
                           : 'text-slate-400 hover:bg-slate-800/70 hover:text-slate-100'
                       }`;
                     }}
@@ -217,14 +209,14 @@ export default function Sidebar({
                       const active = isActive || isLinkActive;
                       return (
                         <>
-                          {/* Active Left Indicator Bar */}
+                          {/* Left Accent Bar */}
                           {active && (
-                            <span className="absolute left-0 top-2 bottom-2 w-1 bg-white rounded-r-full shadow-sm" />
+                            <span className="absolute left-0 top-1.5 bottom-1.5 w-1.5 bg-white rounded-r-full shadow-sm" />
                           )}
 
                           <ItemIcon
                             className={`w-5 h-5 shrink-0 transition-transform duration-200 ${
-                              active ? 'text-white' : 'text-slate-400 group-hover:text-white group-hover:scale-105'
+                              active ? 'text-white scale-105' : 'text-slate-400 group-hover:text-white group-hover:scale-105'
                             }`}
                           />
 
@@ -232,7 +224,6 @@ export default function Sidebar({
                             <span className="truncate tracking-wide">{item.label}</span>
                           )}
 
-                          {/* Tooltip on Collapsed State */}
                           {isCollapsed && (
                             <div className="absolute left-full ml-3 px-3 py-1.5 bg-slate-900 text-white text-xs font-semibold rounded-lg shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 border border-slate-700">
                               {item.label}
@@ -249,9 +240,8 @@ export default function Sidebar({
         </nav>
       </div>
 
-      {/* Bottom Section: User Profile & Logout */}
+      {/* Bottom Section */}
       <div className="p-3 border-t border-slate-800/80 bg-slate-950/50 space-y-2">
-        {/* User Card */}
         <div className={`flex items-center gap-3 px-2 py-1.5 rounded-xl ${isCollapsed ? 'justify-center' : ''}`}>
           <div className="relative flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-bold text-sm shrink-0 shadow-md">
             {user?.name ? user.name.charAt(0) : 'U'}
@@ -270,7 +260,6 @@ export default function Sidebar({
           )}
         </div>
 
-        {/* Logout Button */}
         <button
           onClick={onLogout}
           type="button"
