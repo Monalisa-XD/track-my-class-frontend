@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Sidebar from './components/layout/Sidebar';
+import Sidebar from './layouts/Sidebar';
 import { ShieldCheck, UserCheck2, BookOpenCheck } from 'lucide-react';
 
 function AppContent() {
