@@ -4,16 +4,12 @@ import {
   BookOpen,
   UserCheck,
   Users,
-  School,
-  Calendar,
-  ClipboardCheck,
-  Award,
-  FolderKanban
+  School
 } from 'lucide-react';
 
 /**
  * Mock API data for Admin Dashboard
- * Structured for easy future REST API integration (e.g. GET /api/v1/admin/dashboard-summary)
+ * Terminology aligned 100% with project report entities
  */
 export const dashboardData = {
   welcome: {
@@ -57,7 +53,7 @@ export const dashboardData = {
     },
     {
       id: 'teachers',
-      title: 'Total Faculty',
+      title: 'Total Teachers',
       value: 32,
       subtitle: 'Active teaching staff',
       icon: UserCheck,
@@ -67,9 +63,9 @@ export const dashboardData = {
     },
     {
       id: 'students',
-      title: 'Enrolled Students',
+      title: 'Total Students',
       value: 420,
-      subtitle: 'Verified reg numbers',
+      subtitle: 'Verified registration numbers',
       icon: Users,
       color: 'cyan',
       bgColor: 'bg-cyan-50 text-cyan-600 border-cyan-100',
@@ -77,9 +73,9 @@ export const dashboardData = {
     },
     {
       id: 'classes',
-      title: 'Active Classes',
+      title: 'Total Classes',
       value: 18,
-      subtitle: 'Semester sections',
+      subtitle: 'Scheduled semester sections',
       icon: School,
       color: 'amber',
       bgColor: 'bg-amber-50 text-amber-600 border-amber-100',
