@@ -2,6 +2,7 @@ import React from 'react';
 import WelcomeBanner from './components/WelcomeBanner';
 import StatisticsCards from './components/StatisticsCards';
 import AttendanceOverview from './components/AttendanceOverview';
+import TodaySchedule from './components/TodaySchedule';
 import { dashboardData } from './data/dashboardData';
 import './Dashboard.css';
 
@@ -9,7 +10,7 @@ import './Dashboard.css';
  * Admin Dashboard Page Component
  */
 export default function Dashboard() {
-  const { welcome, statistics, attendanceSummary } = dashboardData;
+  const { welcome, statistics, attendanceSummary, todaySchedule } = dashboardData;
 
   return (
     <div className="space-y-6">
@@ -32,6 +33,9 @@ export default function Dashboard() {
 
       {/* 3. Attendance Overview Widget */}
       <AttendanceOverview data={attendanceSummary} />
+
+      {/* 4. Today's Class Schedule Widget */}
+      <TodaySchedule schedule={todaySchedule} />
     </div>
   );
 }
