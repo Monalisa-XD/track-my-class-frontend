@@ -24,164 +24,250 @@ import {
 } from 'lucide-react';
 
 /**
- * Navigation items configuration by user role
+ * Categorized Navigation configuration by user role
  */
-const MENU_CONFIG = {
+const CATEGORIZED_MENU = {
   ADMIN: [
-    { label: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
-    { label: 'Departments', path: '/admin/departments', icon: Building2 },
-    { label: 'Courses', path: '/admin/courses', icon: GraduationCap },
-    { label: 'Subjects', path: '/admin/subjects', icon: BookOpen },
-    { label: 'Teachers', path: '/admin/teachers', icon: UserCheck },
-    { label: 'Students', path: '/admin/students', icon: Users },
-    { label: 'Classes', path: '/admin/classes', icon: School },
-    { label: 'Schedule', path: '/admin/schedule', icon: Calendar },
-    { label: 'Attendance', path: '/admin/attendance', icon: ClipboardCheck },
-    { label: 'Results', path: '/admin/results', icon: Award },
-    { label: 'Profile', path: '/admin/profile', icon: User },
+    {
+      section: 'MAIN',
+      items: [
+        { label: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard }
+      ]
+    },
+    {
+      section: 'ACADEMIC',
+      items: [
+        { label: 'Departments', path: '/admin/departments', icon: Building2 },
+        { label: 'Courses', path: '/admin/courses', icon: GraduationCap },
+        { label: 'Subjects', path: '/admin/subjects', icon: BookOpen },
+        { label: 'Classes', path: '/admin/classes', icon: School }
+      ]
+    },
+    {
+      section: 'PEOPLE',
+      items: [
+        { label: 'Teachers', path: '/admin/teachers', icon: UserCheck },
+        { label: 'Students', path: '/admin/students', icon: Users }
+      ]
+    },
+    {
+      section: 'MANAGEMENT',
+      items: [
+        { label: 'Schedule', path: '/admin/schedule', icon: Calendar },
+        { label: 'Attendance', path: '/admin/attendance', icon: ClipboardCheck },
+        { label: 'Results', path: '/admin/results', icon: Award }
+      ]
+    },
+    {
+      section: 'ACCOUNT',
+      items: [
+        { label: 'Profile', path: '/admin/profile', icon: User }
+      ]
+    }
   ],
   TEACHER: [
-    { label: 'Dashboard', path: '/teacher/dashboard', icon: LayoutDashboard },
-    { label: 'Schedule', path: '/teacher/schedule', icon: Calendar },
-    { label: 'Students', path: '/teacher/students', icon: Users },
-    { label: 'Attendance', path: '/teacher/attendance', icon: ClipboardCheck },
-    { label: 'Resources', path: '/teacher/resources', icon: FolderKanban },
-    { label: 'Results', path: '/teacher/results', icon: Award },
-    { label: 'Profile', path: '/teacher/profile', icon: User },
+    {
+      section: 'MAIN',
+      items: [
+        { label: 'Dashboard', path: '/teacher/dashboard', icon: LayoutDashboard }
+      ]
+    },
+    {
+      section: 'TEACHING',
+      items: [
+        { label: 'Schedule', path: '/teacher/schedule', icon: Calendar },
+        { label: 'Attendance', path: '/teacher/attendance', icon: ClipboardCheck },
+        { label: 'Students', path: '/teacher/students', icon: Users },
+        { label: 'Resources', path: '/teacher/resources', icon: FolderKanban },
+        { label: 'Results', path: '/teacher/results', icon: Award }
+      ]
+    },
+    {
+      section: 'ACCOUNT',
+      items: [
+        { label: 'Profile', path: '/teacher/profile', icon: User }
+      ]
+    }
   ],
   STUDENT: [
-    { label: 'Dashboard', path: '/student/dashboard', icon: LayoutDashboard },
-    { label: 'Profile', path: '/student/profile', icon: User },
-    { label: 'Schedule', path: '/student/schedule', icon: Calendar },
-    { label: 'Attendance', path: '/student/attendance', icon: ClipboardCheck },
-    { label: 'Results', path: '/student/results', icon: Award },
-    { label: 'Syllabus', path: '/student/syllabus', icon: BookMarked },
-    { label: 'Resources', path: '/student/resources', icon: FolderDown },
+    {
+      section: 'MAIN',
+      items: [
+        { label: 'Dashboard', path: '/student/dashboard', icon: LayoutDashboard }
+      ]
+    },
+    {
+      section: 'ACADEMIC',
+      items: [
+        { label: 'Schedule', path: '/student/schedule', icon: Calendar },
+        { label: 'Attendance', path: '/student/attendance', icon: ClipboardCheck },
+        { label: 'Results', path: '/student/results', icon: Award },
+        { label: 'Syllabus', path: '/student/syllabus', icon: BookMarked },
+        { label: 'Resources', path: '/student/resources', icon: FolderDown }
+      ]
+    },
+    {
+      section: 'ACCOUNT',
+      items: [
+        { label: 'Profile', path: '/student/profile', icon: User }
+      ]
+    }
   ]
 };
 
-const ROLE_BADGES = {
-  ADMIN: { label: 'Administrator', bg: 'bg-blue-500/20 text-blue-400 border-blue-500/30', icon: ShieldCheck },
-  TEACHER: { label: 'Faculty Member', bg: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30', icon: UserCheck2 },
-  STUDENT: { label: 'Student', bg: 'bg-purple-500/20 text-purple-400 border-purple-500/30', icon: BookOpenCheck }
+const ROLE_DETAILS = {
+  ADMIN: { label: 'Administrator', badgeBg: 'bg-blue-500/20 text-blue-400 border-blue-500/30' },
+  TEACHER: { label: 'Faculty Member', badgeBg: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' },
+  STUDENT: { label: 'Student', badgeBg: 'bg-purple-500/20 text-purple-400 border-purple-500/30' }
 };
 
-/**
- * Sidebar Component
- * @param {Object} props
- * @param {string} props.role - Current user role: 'ADMIN' | 'TEACHER' | 'STUDENT'
- * @param {boolean} props.isCollapsed - Collapse state
- * @param {Function} props.onToggleCollapse - Function to toggle collapse
- * @param {Function} props.onLogout - Callback on logout click
- * @param {Object} props.user - User details object { name, email, regNo }
- */
 export default function Sidebar({
   role = 'ADMIN',
   isCollapsed = false,
   onToggleCollapse,
   onLogout,
-  user = { name: 'Dr. Satya Prakash', role: 'ADMIN' }
+  user = { name: 'Monalisa Jena', email: 'monalisa@vssut.ac.in' }
 }) {
   const location = useLocation();
-  const navItems = MENU_CONFIG[role?.toUpperCase()] || MENU_CONFIG.ADMIN;
-  const roleBadge = ROLE_BADGES[role?.toUpperCase()] || ROLE_BADGES.ADMIN;
-  const RoleIcon = roleBadge.icon;
+  const menuSections = CATEGORIZED_MENU[role?.toUpperCase()] || CATEGORIZED_MENU.ADMIN;
+  const roleMeta = ROLE_DETAILS[role?.toUpperCase()] || ROLE_DETAILS.ADMIN;
 
   return (
     <aside
-      className={`relative h-screen bg-[#0F172A] text-slate-300 flex flex-col justify-between transition-all duration-300 ease-in-out z-30 select-none border-r border-slate-800 shadow-xl dark-scrollbar ${
-        isCollapsed ? 'w-20' : 'w-64'
+      className={`relative h-screen bg-[#0F172A] text-slate-300 flex flex-col justify-between transition-all duration-300 ease-in-out z-30 select-none border-r border-slate-800/80 shadow-2xl ${
+        isCollapsed ? 'w-[76px]' : 'w-[250px]'
       }`}
     >
       {/* Top Section: Logo & Toggle */}
-      <div>
-        <div className="flex items-center justify-between h-16 px-4 border-b border-slate-800/80">
+      <div className="flex flex-col flex-1 min-h-0">
+        <div className="flex items-center justify-between h-16 px-4 border-b border-slate-800/80 shrink-0">
           <div className="flex items-center gap-3 overflow-hidden">
-            <div className="flex items-center justify-center min-w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white shadow-lg shadow-blue-500/25">
+            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-600/30 shrink-0">
               <GraduationCap className="w-6 h-6" />
             </div>
+
             {!isCollapsed && (
-              <div className="flex flex-col tracking-tight leading-none">
-                <span className="font-extrabold text-white text-lg tracking-wide">TrackMyClass</span>
-                <span className="text-[10px] uppercase font-bold tracking-wider text-blue-400 mt-1">Academic ERP</span>
+              <div className="flex flex-col leading-none">
+                <span className="text-xl font-extrabold text-white tracking-tight">
+                  Track<span className="text-blue-500">MyClass</span>
+                </span>
+                <span className="text-[10px] font-medium tracking-widest text-slate-400 uppercase mt-0.5">
+                  Academic ERP
+                </span>
               </div>
             )}
           </div>
 
-          {/* Collapse Toggle Button */}
           <button
             onClick={onToggleCollapse}
-            className="hidden md:flex items-center justify-center w-8 h-8 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors border border-slate-700/50"
+            type="button"
+            className="hidden md:flex items-center justify-center w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-all border border-slate-700/60 shadow-sm"
             title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
             aria-label="Toggle Sidebar"
           >
-            {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+            <ChevronLeft
+              className={`w-4 h-4 transition-transform duration-300 ${
+                isCollapsed ? 'rotate-180' : ''
+              }`}
+            />
           </button>
         </div>
 
-        {/* User Role Badge */}
-        {!isCollapsed && (
-          <div className="px-4 py-3 mx-3 mt-3 rounded-lg bg-slate-800/50 border border-slate-700/40 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <RoleIcon className="w-4 h-4 text-slate-400" />
-              <span className="text-xs font-semibold text-slate-300">{roleBadge.label}</span>
+        {/* Navigation Categories */}
+        <nav className="flex-1 overflow-y-auto px-3 py-3 space-y-4 sidebar-scroll">
+          {menuSections.map((group) => (
+            <div key={group.section} className="space-y-1">
+              {!isCollapsed ? (
+                <div className="px-3 pt-2 pb-1 text-[11px] font-bold tracking-wider text-slate-500 uppercase">
+                  {group.section}
+                </div>
+              ) : (
+                <div className="my-2 border-t border-slate-800/60" />
+              )}
+
+              {group.items.map((item) => {
+                const ItemIcon = item.icon;
+                const isActive =
+                  location.pathname === item.path ||
+                  (item.path !== '/' && location.pathname.startsWith(item.path));
+
+                return (
+                  <NavLink
+                    key={item.label}
+                    to={item.path}
+                    className={({ isActive: isLinkActive }) => {
+                      const active = isActive || isLinkActive;
+                      return `group relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
+                        active
+                          ? 'bg-[#2563EB] text-white font-semibold shadow-md shadow-blue-600/30 overflow-hidden'
+                          : 'text-slate-400 hover:bg-slate-800/70 hover:text-slate-100'
+                      }`;
+                    }}
+                  >
+                    {({ isActive: isLinkActive }) => {
+                      const active = isActive || isLinkActive;
+                      return (
+                        <>
+                          {active && (
+                            <span className="absolute left-0 top-2 bottom-2 w-1 bg-white rounded-r-full shadow-sm" />
+                          )}
+
+                          <ItemIcon
+                            className={`w-5 h-5 shrink-0 transition-transform duration-200 ${
+                              active ? 'text-white' : 'text-slate-400 group-hover:text-white group-hover:scale-105'
+                            }`}
+                          />
+
+                          {!isCollapsed && (
+                            <span className="truncate tracking-wide">{item.label}</span>
+                          )}
+
+                          {isCollapsed && (
+                            <div className="absolute left-full ml-3 px-3 py-1.5 bg-slate-900 text-white text-xs font-semibold rounded-lg shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 border border-slate-700">
+                              {item.label}
+                            </div>
+                          )}
+                        </>
+                      );
+                    }}
+                  </NavLink>
+                );
+              })}
             </div>
-            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${roleBadge.bg}`}>
-              {role?.toUpperCase()}
-            </span>
-          </div>
-        )}
-
-        {/* Navigation Links */}
-        <nav className="p-3 space-y-1.5 overflow-y-auto max-h-[calc(100vh-210px)]">
-          {navItems.map((item) => {
-            const ItemIcon = item.icon;
-            const isActive = location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path));
-
-            return (
-              <NavLink
-                key={item.label}
-                to={item.path}
-                className={({ isActive: isLinkActive }) => {
-                  const active = isActive || isLinkActive;
-                  return `group relative flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 ${
-                    active
-                      ? 'bg-blue-600 text-white font-semibold shadow-md shadow-blue-600/30'
-                      : 'text-slate-400 hover:bg-slate-800/80 hover:text-white'
-                  }`;
-                }}
-              >
-                <ItemIcon
-                  className={`w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-110`}
-                />
-                
-                {!isCollapsed && (
-                  <span className="truncate tracking-wide">{item.label}</span>
-                )}
-
-                {/* Collapsed Tooltip */}
-                {isCollapsed && (
-                  <div className="absolute left-full ml-3 px-3 py-1.5 bg-slate-900 text-white text-xs font-semibold rounded-lg shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 border border-slate-700">
-                    {item.label}
-                  </div>
-                )}
-              </NavLink>
-            );
-          })}
+          ))}
         </nav>
       </div>
 
-      {/* Bottom Section: Logout */}
-      <div className="p-3 border-t border-slate-800/80 bg-slate-950/40">
+      {/* Bottom Section */}
+      <div className="p-3 border-t border-slate-800/80 bg-slate-950/50 space-y-2">
+        <div className={`flex items-center gap-3 px-2 py-1.5 rounded-xl ${isCollapsed ? 'justify-center' : ''}`}>
+          <div className="relative flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-bold text-sm shrink-0 shadow-md">
+            {user?.name ? user.name.charAt(0) : 'U'}
+            <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-[#0F172A]" />
+          </div>
+
+          {!isCollapsed && (
+            <div className="flex flex-col min-w-0 flex-1">
+              <span className="text-sm font-bold text-white truncate leading-snug">
+                👤 {user?.name || 'Monalisa Jena'}
+              </span>
+              <span className="text-xs text-slate-400 truncate">
+                {roleMeta.label}
+              </span>
+            </div>
+          )}
+        </div>
+
         <button
           onClick={onLogout}
-          className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-colors border border-transparent hover:border-rose-500/20 group ${
+          type="button"
+          className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-semibold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-all duration-150 group ${
             isCollapsed ? 'justify-center' : ''
           }`}
           title="Sign out of your account"
         >
-          <LogOut className="w-5 h-5 shrink-0 transition-transform group-hover:-translate-x-0.5" />
-          {!isCollapsed && <span className="font-semibold">Logout</span>}
+          <LogOut className="w-4 h-4 shrink-0 transition-transform group-hover:-translate-x-0.5" />
+          {!isCollapsed && <span>Logout</span>}
         </button>
       </div>
     </aside>
