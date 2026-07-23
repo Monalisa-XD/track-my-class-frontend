@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import AdminDashboard from './pages/admin/Dashboard';
 import Departments from './pages/admin/Departments';
+import Courses from './pages/admin/Courses';
 
 /**
  * Placeholder Page Component for other sub-routes until implemented
@@ -53,7 +54,7 @@ export default function App() {
           {/* Admin Routes */}
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/departments" element={<Departments />} />
-          <Route path="/admin/courses" element={<PlaceholderPage title="Course Management" details="Manage degree programs, course codes, duration, and fees." />} />
+          <Route path="/admin/courses" element={<Courses />} />
           <Route path="/admin/subjects" element={<PlaceholderPage title="Subject Management" details="Manage subjects, semester allocations, and reference textbooks." />} />
           <Route path="/admin/teachers" element={<PlaceholderPage title="Teacher Directory" details="Register faculty members, generate credentials, and send email confirmations." />} />
           <Route path="/admin/students" element={<PlaceholderPage title="Student Directory" details="Manage student admissions, auto-generate registration numbers, and view profiles." />} />

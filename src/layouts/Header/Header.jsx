@@ -20,7 +20,7 @@ const ROUTE_META = {
     }
   },
   courses: {
-    title: 'Course Management',
+    title: 'Courses',
     description: 'Manage academic degree programs, total duration, and fee structures.',
     actions: {
       ADMIN: { label: 'Add Course', actionKey: 'ADD_COURSE' }
