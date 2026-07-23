@@ -322,7 +322,7 @@ export const dashboardData = {
     {
       id: 'qa-attendance',
       title: 'Attendance',
-      description: 'Mark attendance or view overall stats and alerts.',
+      description: 'Mark, review, and manage attendance records.',
       path: '/admin/attendance',
       icon: ClipboardCheck,
       color: 'green',
@@ -331,7 +331,7 @@ export const dashboardData = {
     {
       id: 'qa-publish-results',
       title: 'Publish Results',
-      description: 'Upload marks via Excel and declare official results.',
+      description: 'Publish and manage semester examination results.',
       path: '/admin/results',
       icon: Award,
       color: 'amber',

@@ -21,14 +21,14 @@ const GLOW_CLASSES = {
  * Premium gradients matching the module icons
  */
 const ICON_GRADIENTS = {
-  blue: 'from-blue-500 to-indigo-600 shadow-blue-500/20',
-  indigo: 'from-indigo-500 to-purple-600 shadow-indigo-500/20',
-  purple: 'from-purple-500 to-pink-600 shadow-purple-500/20',
-  emerald: 'from-emerald-500 to-teal-600 shadow-emerald-500/20',
-  cyan: 'from-cyan-500 to-blue-500 shadow-cyan-500/20',
-  amber: 'from-amber-500 to-orange-600 shadow-amber-500/20',
-  orange: 'from-orange-500 to-red-600 shadow-orange-500/20',
-  green: 'from-green-500 to-emerald-600 shadow-green-500/20'
+  blue: 'from-blue-500 to-indigo-600 shadow-blue-500/20 group-hover:shadow-blue-500/40',
+  indigo: 'from-indigo-500 to-purple-600 shadow-indigo-500/20 group-hover:shadow-indigo-500/40',
+  purple: 'from-purple-500 to-pink-600 shadow-purple-500/20 group-hover:shadow-purple-500/40',
+  emerald: 'from-emerald-500 to-teal-600 shadow-emerald-500/20 group-hover:shadow-emerald-500/40',
+  cyan: 'from-cyan-500 to-blue-500 shadow-cyan-500/20 group-hover:shadow-cyan-500/40',
+  amber: 'from-amber-500 to-orange-600 shadow-amber-500/20 group-hover:shadow-amber-500/40',
+  orange: 'from-orange-500 to-red-600 shadow-orange-500/20 group-hover:shadow-orange-500/40',
+  green: 'from-green-500 to-emerald-600 shadow-green-500/20 group-hover:shadow-green-500/40'
 };
 
 /**
@@ -42,7 +42,7 @@ function ActionCard({ action }) {
   return (
     <Link
       to={action.path}
-      className={`group relative flex flex-col justify-between p-5 rounded-2xl bg-gradient-to-b from-white to-slate-50/50 border border-slate-200/60 shadow-ambient inner-highlight transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-ambient-hover select-none overflow-hidden ${glowClass}`}
+      className={`group relative flex flex-col justify-between p-5 rounded-2xl bg-gradient-to-b from-white to-slate-50/50 border border-slate-200/60 shadow-ambient inner-highlight transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-ambient-hover select-none overflow-hidden ${glowClass}`}
     >
       {/* Subtle Inner Top Glow Highlight */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200/50 to-transparent opacity-60" />
@@ -51,7 +51,7 @@ function ActionCard({ action }) {
         {/* Top row: Icon with Ambient Glow & Action Arrow */}
         <div className="flex items-start justify-between">
           <div
-            className={`w-11 h-11 rounded-xl bg-gradient-to-tr text-white flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 ${gradientClass}`}
+            className={`w-11 h-11 rounded-xl bg-gradient-to-tr text-white flex items-center justify-center shadow-lg transition-all duration-300 group-hover:scale-105 ${gradientClass}`}
           >
             <IconComponent className="w-5.5 h-5.5" />
           </div>
