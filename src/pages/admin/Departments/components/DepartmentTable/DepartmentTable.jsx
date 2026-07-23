@@ -1,61 +1,119 @@
 import React from 'react';
-import { Eye, Edit2, Trash2, Building2, ChevronsUpDown } from 'lucide-react';
+import { Eye, Edit2, Trash2, Building2, ChevronUp, ChevronDown, ChevronsUpDown } from 'lucide-react';
 import './DepartmentTable.css';
 
 /**
  * DepartmentTable Component
  * Displays the departments in a premium table view with detailed hover actions, status gradients, and sorted row transitions.
+ * Supports interactive header clicks for sorting sync.
  * 
  * @param {Object} props
  * @param {Array} props.departments - Filtered list of departments
+ * @param {string} props.sortBy - Active sorting criteria (e.g. "code-asc")
+ * @param {Function} props.onSortChange - Toggle handler for active sorting
  * @param {Function} props.onView - Handler for viewing a department
  * @param {Function} props.onEdit - Handler for editing a department
  * @param {Function} props.onDelete - Handler for deleting a department
  */
 export default function DepartmentTable({
   departments = [],
+  sortBy = 'code-asc',
+  onSortChange,
   onView,
   onEdit,
   onDelete
 }) {
+  
+  // Helper to determine sort headers
+  const renderSortIcon = (fieldKey) => {
+    if (!onSortChange) return <ChevronsUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />;
+
+    const isCurrentField = sortBy.startsWith(fieldKey);
+    if (!isCurrentField) {
+      return <ChevronsUpDown className="w-3.5 h-3.5 text-slate-400 opacity-40 group-hover/header:opacity-80 transition-opacity" />;
+    }
+
+    return sortBy.endsWith('asc') ? (
+      <ChevronUp className="w-3.5 h-3.5 text-blue-600 font-bold" />
+    ) : (
+      <ChevronDown className="w-3.5 h-3.5 text-blue-600 font-bold" />
+    );
+  };
+
+  const handleHeaderClick = (fieldKey) => {
+    if (!onSortChange) return;
+
+    if (sortBy.startsWith(fieldKey)) {
+      const nextDir = sortBy.endsWith('asc') ? 'desc' : 'asc';
+      onSortChange(`${fieldKey}-${nextDir}`);
+    } else {
+      const nextDir = (fieldKey === 'teachers' || fieldKey === 'students') ? 'desc' : 'asc';
+      onSortChange(`${fieldKey}-${nextDir}`);
+    }
+  };
+
   return (
     <div className="hidden md:block w-full overflow-hidden bg-white rounded-2xl border border-slate-200/80 shadow-ambient select-none">
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-slate-50/75 border-b border-slate-200 text-xs font-extrabold uppercase tracking-wider text-slate-500">
-              <th className="py-4 px-6 font-extrabold">
+              
+              {/* Code Sort Header */}
+              <th 
+                onClick={() => handleHeaderClick('code')}
+                className="py-4 px-6 font-extrabold cursor-pointer group/header hover:bg-slate-100/50 hover:text-slate-700 transition-colors select-none"
+              >
                 <div className="flex items-center gap-1">
                   <span>Code</span>
-                  <ChevronsUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+                  {renderSortIcon('code')}
                 </div>
               </th>
-              <th className="py-4 px-6 font-extrabold">
+
+              {/* Name Sort Header */}
+              <th 
+                onClick={() => handleHeaderClick('name')}
+                className="py-4 px-6 font-extrabold cursor-pointer group/header hover:bg-slate-100/50 hover:text-slate-700 transition-colors select-none"
+              >
                 <div className="flex items-center gap-1">
                   <span>Department Name</span>
-                  <ChevronsUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+                  {renderSortIcon('name')}
                 </div>
               </th>
+
+              {/* HOD Header */}
               <th className="py-4 px-6 font-extrabold">
-                <div className="flex items-center gap-1">
-                  <span>HOD Name</span>
-                  <ChevronsUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
-                </div>
+                <span>HOD Name</span>
               </th>
-              <th className="py-4 px-6 font-extrabold text-center">
+
+              {/* Teachers Header */}
+              <th 
+                onClick={() => handleHeaderClick('teachers')}
+                className="py-4 px-6 font-extrabold text-center cursor-pointer group/header hover:bg-slate-100/50 hover:text-slate-700 transition-colors select-none"
+              >
                 <div className="flex items-center justify-center gap-1">
                   <span>Teachers</span>
-                  <ChevronsUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+                  {renderSortIcon('teachers')}
                 </div>
               </th>
-              <th className="py-4 px-6 font-extrabold text-center">
+
+              {/* Students Header */}
+              <th 
+                onClick={() => handleHeaderClick('students')}
+                className="py-4 px-6 font-extrabold text-center cursor-pointer group/header hover:bg-slate-100/50 hover:text-slate-700 transition-colors select-none"
+              >
                 <div className="flex items-center justify-center gap-1">
                   <span>Students</span>
-                  <ChevronsUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+                  {renderSortIcon('students')}
                 </div>
               </th>
+
+              {/* Status Header */}
               <th className="py-4 px-6 font-extrabold text-center">Status</th>
+              
+              {/* Created Date Header */}
               <th className="py-4 px-6 font-extrabold">Created Date</th>
+              
               <th className="py-4 px-6 text-right">Actions</th>
             </tr>
           </thead>

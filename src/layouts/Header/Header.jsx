@@ -13,7 +13,7 @@ const ROUTE_META = {
     actions: {}
   },
   departments: {
-    title: 'Department Management',
+    title: 'Departments',
     description: 'Manage all academic departments, codes, and assigned HOD details.',
     actions: {
       ADMIN: { label: 'Add Department', actionKey: 'ADD_DEPARTMENT' }

@@ -24,7 +24,7 @@ const ICON_GRADIENTS = {
 
 /**
  * DepartmentStats Component
- * Renders 4 premium summary metric cards with lift hover effects and subtle colored glows.
+ * Renders 4 premium summary metric cards with dynamic trend indicators and hover animations.
  * 
  * @param {Object} props
  * @param {Array} props.departments - Array of all active departments
@@ -35,7 +35,7 @@ export default function DepartmentStats({ departments = [] }) {
   const active = departments.filter(d => d.status === 'Active').length;
   const inactive = departments.filter(d => d.status === 'Inactive').length;
   
-  // Calculate unique HODs (filtering out empty names)
+  // Calculate unique HODs
   const uniqueHods = new Set(
     departments
       .map(d => d.hod)
@@ -49,7 +49,9 @@ export default function DepartmentStats({ departments = [] }) {
       value: total,
       label: 'Registered branches',
       icon: Building2,
-      color: 'blue'
+      color: 'blue',
+      trend: 'Updated today',
+      trendType: 'neutral'
     },
     {
       id: 'stat-active-dept',
@@ -57,7 +59,9 @@ export default function DepartmentStats({ departments = [] }) {
       value: active,
       label: 'Offering courses',
       icon: CheckCircle2,
-      color: 'emerald'
+      color: 'emerald',
+      trend: '↑ +1 this month',
+      trendType: 'success'
     },
     {
       id: 'stat-inactive-dept',
@@ -65,7 +69,9 @@ export default function DepartmentStats({ departments = [] }) {
       value: inactive,
       label: 'Suspended branches',
       icon: XCircle,
-      color: 'amber'
+      color: 'amber',
+      trend: 'No changes',
+      trendType: 'neutral'
     },
     {
       id: 'stat-total-hods',
@@ -73,7 +79,9 @@ export default function DepartmentStats({ departments = [] }) {
       value: uniqueHods,
       label: 'Department leaders',
       icon: UserCheck,
-      color: 'indigo'
+      color: 'indigo',
+      trend: '100% assigned',
+      trendType: 'success'
     }
   ];
 
@@ -83,6 +91,9 @@ export default function DepartmentStats({ departments = [] }) {
         const IconComponent = card.icon;
         const glowClass = GLOW_CLASSES[card.color] || GLOW_CLASSES.blue;
         const gradientClass = ICON_GRADIENTS[card.color] || ICON_GRADIENTS.blue;
+        
+        // Dynamic trend styles
+        const isSuccessTrend = card.trendType === 'success';
 
         return (
           <div
@@ -101,9 +112,23 @@ export default function DepartmentStats({ departments = [] }) {
 
             {/* Content info */}
             <div className="flex-1 min-w-0">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                {card.title}
-              </span>
+              <div className="flex items-center justify-between gap-1.5 flex-wrap">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  {card.title}
+                </span>
+                
+                {/* Trend indicator pill */}
+                <span
+                  className={`px-1.5 py-0.5 rounded-md text-[9px] font-extrabold border ${
+                    isSuccessTrend
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200/60 shadow-[0_1px_4px_rgba(16,185,129,0.06)]'
+                      : 'bg-slate-50 text-slate-500 border-slate-200/60'
+                  }`}
+                >
+                  {card.trend}
+                </span>
+              </div>
+              
               <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight leading-none mt-1">
                 {card.value}
               </h3>

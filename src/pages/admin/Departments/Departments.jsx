@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import DepartmentHeader from './components/DepartmentHeader';
 import DepartmentStats from './components/DepartmentStats';
 import DepartmentFilters from './components/DepartmentFilters';
 import DepartmentTable from './components/DepartmentTable';
@@ -13,6 +12,7 @@ import './Departments.css';
 /**
  * Departments Page Component
  * Main page coordinating the state, filters, sorting, stats cards, table grid, mobile fallback, and modals.
+ * Removes duplicate local header, linking instead to the layout's global action button via custom events.
  */
 export default function Departments() {
   // State for department records
@@ -40,6 +40,26 @@ export default function Departments() {
     setCurrentPage(1);
   }, [searchTerm, statusFilter, sortBy]);
 
+  // Open modal for adding a new department
+  const handleAddClick = () => {
+    setModalMode('add');
+    setSelectedDept(null);
+    setIsAddModalOpen(true);
+  };
+
+  // Connect to global page-header action button using custom event listener
+  useEffect(() => {
+    const handleHeaderAction = (e) => {
+      if (e.detail === 'ADD_DEPARTMENT') {
+        handleAddClick();
+      }
+    };
+    window.addEventListener('header-action', handleHeaderAction);
+    return () => {
+      window.removeEventListener('header-action', handleHeaderAction);
+    };
+  }, [departments]);
+
   // Reset all filters and sorting parameters
   const handleResetFilters = () => {
     setSearchTerm('');
@@ -57,13 +77,6 @@ export default function Departments() {
   // Export report alert simulator
   const handleExport = () => {
     alert('Exporting departments records to Excel (.xlsx) file format...');
-  };
-
-  // Open modal for adding a new department
-  const handleAddClick = () => {
-    setModalMode('add');
-    setSelectedDept(null);
-    setIsAddModalOpen(true);
   };
 
   // Open modal for viewing details (read-only)
@@ -134,8 +147,12 @@ export default function Departments() {
         return b.name.localeCompare(a.name);
       case 'teachers-desc':
         return b.totalTeachers - a.totalTeachers;
+      case 'teachers-asc':
+        return a.totalTeachers - b.totalTeachers;
       case 'students-desc':
         return b.totalStudents - a.totalStudents;
+      case 'students-asc':
+        return a.totalStudents - b.totalStudents;
       default:
         return 0;
     }
@@ -152,13 +169,10 @@ export default function Departments() {
   return (
     <div className="space-y-6">
       
-      {/* 1. Header widget with title and actions */}
-      <DepartmentHeader onAddClick={handleAddClick} />
-
-      {/* 2. Top Summary Metric Cards */}
+      {/* 1. Top Summary Metric Cards */}
       <DepartmentStats departments={departments} />
 
-      {/* 3. Toolbar with Search, Status dropdown, Sorting selectors, and Action icons */}
+      {/* 2. Toolbar with Search, Status dropdown, Sorting selectors, and Action icons */}
       <DepartmentFilters
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
@@ -171,7 +185,7 @@ export default function Departments() {
         onReset={handleResetFilters}
       />
 
-      {/* 4. Empty State or Main Records Grid Layout */}
+      {/* 3. Empty State or Main Records Grid Layout */}
       {totalEntries === 0 ? (
         <EmptyState
           isSearchEmpty={isSearchActive}
@@ -184,6 +198,8 @@ export default function Departments() {
           {/* Desktop tabular view */}
           <DepartmentTable
             departments={paginatedDepartments}
+            sortBy={sortBy}
+            onSortChange={setSortBy}
             onView={handleViewClick}
             onEdit={handleEditClick}
             onDelete={handleDeleteClick}
@@ -254,7 +270,7 @@ export default function Departments() {
         </div>
       )}
 
-      {/* 5. Unified Add/Edit/View Details Modal Overlay */}
+      {/* 4. Unified Add/Edit/View Details Modal Overlay */}
       <AddDepartmentModal
         isOpen={isAddModalOpen}
         onClose={() => {
@@ -266,7 +282,7 @@ export default function Departments() {
         onSave={handleSave}
       />
 
-      {/* 6. Destructive warning delete modal overlay */}
+      {/* 5. Destructive warning delete modal overlay */}
       <DeleteDepartmentModal
         isOpen={isDeleteModalOpen}
         onClose={() => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, RotateCcw, Filter, ArrowUpDown, RefreshCw, Download } from 'lucide-react';
+import { Search, RotateCcw, Filter, ArrowUpDown, RefreshCw, Download, X } from 'lucide-react';
 import './DepartmentFilters.css';
 
 /**
@@ -28,6 +28,12 @@ export default function DepartmentFilters({
   onExport,
   onReset
 }) {
+  // Calculate count of active filters
+  const activeFiltersCount = 
+    (searchTerm.trim() !== '' ? 1 : 0) + 
+    (statusFilter !== 'All' ? 1 : 0) + 
+    (sortBy !== 'code-asc' ? 1 : 0);
+
   return (
     <div className="bg-white p-4.5 rounded-2xl border border-slate-200/80 shadow-ambient inner-highlight flex flex-col xl:flex-row xl:items-center justify-between gap-4 select-none">
       
@@ -44,8 +50,17 @@ export default function DepartmentFilters({
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search departments by code, name, or HOD..."
-            className="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 rounded-xl outline-none transition-all duration-200 font-medium text-slate-800 placeholder-slate-400"
+            className="w-full pl-10 pr-10 py-2.5 text-sm bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 rounded-xl outline-none transition-all duration-200 font-medium text-slate-800 placeholder-slate-400"
           />
+          {searchTerm && (
+            <button
+              type="button"
+              onClick={() => onSearchChange('')}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
         </div>
 
         {/* Status Dropdown selector */}
@@ -109,19 +124,26 @@ export default function DepartmentFilters({
           <span>Export</span>
         </button>
 
-        {/* Reset Filter Button */}
+        {/* Reset Filter Button with active count badge */}
         <button
           type="button"
           onClick={onReset}
-          disabled={!searchTerm && statusFilter === 'All' && sortBy === 'code-asc'}
-          className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 border rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
-            searchTerm || statusFilter !== 'All' || sortBy !== 'code-asc'
+          disabled={activeFiltersCount === 0}
+          className={`inline-flex items-center justify-center gap-2 px-3.5 py-2.5 border rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
+            activeFiltersCount > 0
               ? 'border-slate-200 bg-white hover:bg-slate-50 text-slate-700 active:scale-95 shadow-2xs'
               : 'border-slate-100 bg-slate-50/50 text-slate-400 cursor-not-allowed'
           }`}
         >
           <RotateCcw className="w-3.5 h-3.5" />
           <span>Reset</span>
+          
+          {/* Active Filter Count Badge */}
+          {activeFiltersCount > 0 && (
+            <span className="w-4.5 h-4.5 bg-blue-600 text-white font-extrabold text-[10px] rounded-full flex items-center justify-center shrink-0 shadow-sm leading-none">
+              {activeFiltersCount}
+            </span>
+          )}
         </button>
 
       </div>
