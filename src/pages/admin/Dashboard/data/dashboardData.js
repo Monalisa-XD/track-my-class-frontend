@@ -254,5 +254,88 @@ export const dashboardData = {
       iconBg: 'bg-purple-500 text-white shadow-purple-500/30',
       badgeBg: 'bg-purple-50 text-purple-700 border-purple-200'
     }
+  ],
+  quickActions: [
+    {
+      id: 'qa-add-department',
+      title: 'Add Department',
+      description: 'Register a new academic department and assign HOD.',
+      path: '/admin/departments',
+      icon: Building2,
+      color: 'blue',
+      iconBg: 'bg-blue-50 text-blue-600 border-blue-100 hover:bg-blue-100'
+    },
+    {
+      id: 'qa-add-course',
+      title: 'Add Course',
+      description: 'Configure new degree programs and syllabus structures.',
+      path: '/admin/courses',
+      icon: GraduationCap,
+      color: 'purple',
+      iconBg: 'bg-purple-50 text-purple-600 border-purple-100 hover:bg-purple-100'
+    },
+    {
+      id: 'qa-add-subject',
+      title: 'Add Subject',
+      description: 'Create theory/lab modules with credit allocations.',
+      path: '/admin/subjects',
+      icon: BookOpen,
+      color: 'indigo',
+      iconBg: 'bg-indigo-50 text-indigo-600 border-indigo-100 hover:bg-indigo-100'
+    },
+    {
+      id: 'qa-create-class',
+      title: 'Create Class',
+      description: 'Define semester sections and assign classrooms.',
+      path: '/admin/classes',
+      icon: School,
+      color: 'blue',
+      iconBg: 'bg-blue-50 text-blue-600 border-blue-100 hover:bg-blue-100'
+    },
+    {
+      id: 'qa-add-teacher',
+      title: 'Add Teacher',
+      description: 'Register faculty and setup teaching departments.',
+      path: '/admin/teachers',
+      icon: UserCheck,
+      color: 'emerald',
+      iconBg: 'bg-emerald-50 text-emerald-600 border-emerald-100 hover:bg-emerald-100'
+    },
+    {
+      id: 'qa-add-student',
+      title: 'Add Student',
+      description: 'Admit student and auto-generate registration number.',
+      path: '/admin/students',
+      icon: Users,
+      color: 'cyan',
+      iconBg: 'bg-cyan-50 text-cyan-600 border-cyan-100 hover:bg-cyan-100'
+    },
+    {
+      id: 'qa-create-schedule',
+      title: 'Create Schedule',
+      description: 'Draft period timetables and resolve conflicts.',
+      path: '/admin/schedule',
+      icon: Calendar,
+      color: 'orange',
+      iconBg: 'bg-orange-50 text-orange-600 border-orange-100 hover:bg-orange-200'
+    },
+    {
+      id: 'qa-attendance',
+      title: 'Attendance',
+      description: 'Mark attendance or view overall stats and alerts.',
+      path: '/admin/attendance',
+      icon: ClipboardCheck,
+      color: 'green',
+      iconBg: 'bg-green-50 text-green-600 border-green-100 hover:bg-green-200'
+    },
+    {
+      id: 'qa-publish-results',
+      title: 'Publish Results',
+      description: 'Upload marks via Excel and declare official results.',
+      path: '/admin/results',
+      icon: Award,
+      color: 'amber',
+      iconBg: 'bg-amber-50 text-amber-600 border-amber-100 hover:bg-amber-200'
+    }
   ]
 };
