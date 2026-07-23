@@ -4,6 +4,7 @@ import StatisticsCards from './components/StatisticsCards';
 import AttendanceOverview from './components/AttendanceOverview';
 import TodaySchedule from './components/TodaySchedule';
 import RecentActivities from './components/RecentActivities';
+import QuickActions from './components/QuickActions';
 import { dashboardData } from './data/dashboardData';
 import './Dashboard.css';
 
@@ -11,7 +12,7 @@ import './Dashboard.css';
  * Admin Dashboard Page Component
  */
 export default function Dashboard() {
-  const { welcome, statistics, attendanceSummary, todaySchedule, recentActivities } = dashboardData;
+  const { welcome, statistics, attendanceSummary, todaySchedule, recentActivities, quickActions } = dashboardData;
 
   return (
     <div className="space-y-6">
@@ -40,6 +41,9 @@ export default function Dashboard() {
 
       {/* 5. Recent System Activities Feed */}
       <RecentActivities activities={recentActivities} />
+
+      {/* 6. Quick Actions Center */}
+      <QuickActions actions={quickActions} />
     </div>
   );
 }

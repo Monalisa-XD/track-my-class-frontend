@@ -1,0 +1,17 @@
+/* QuickActions custom glow styles */
+
+/* Tailwind-styled selectors for Orange */
+.hover\:shadow-glow-orange:hover {
+  box-shadow: 0 10px 30px -5px rgba(249, 115, 22, 0.18);
+}
+.hover\:border-orange-300\/80:hover {
+  border-color: rgba(253, 186, 116, 0.8);
+}
+
+/* Tailwind-styled selectors for Green */
+.hover\:shadow-glow-green:hover {
+  box-shadow: 0 10px 30px -5px rgba(34, 197, 94, 0.18);
+}
+.hover\:border-green-300\/80:hover {
+  border-color: rgba(187, 247, 208, 0.8);
+}
