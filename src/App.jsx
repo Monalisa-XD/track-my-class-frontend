@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import AdminDashboard from './pages/admin/Dashboard';
+import Departments from './pages/admin/Departments';
 
 /**
  * Placeholder Page Component for other sub-routes until implemented
@@ -29,7 +30,8 @@ export default function App() {
   };
 
   const handleHeaderAction = (actionKey) => {
-    alert(`Header action triggered: ${actionKey}`);
+    const event = new CustomEvent('header-action', { detail: actionKey });
+    window.dispatchEvent(event);
   };
 
   return (
@@ -50,7 +52,7 @@ export default function App() {
 
           {/* Admin Routes */}
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/departments" element={<PlaceholderPage title="Department Management" details="Add, edit, deactivate departments and assign HOD contact details." />} />
+          <Route path="/admin/departments" element={<Departments />} />
           <Route path="/admin/courses" element={<PlaceholderPage title="Course Management" details="Manage degree programs, course codes, duration, and fees." />} />
           <Route path="/admin/subjects" element={<PlaceholderPage title="Subject Management" details="Manage subjects, semester allocations, and reference textbooks." />} />
           <Route path="/admin/teachers" element={<PlaceholderPage title="Teacher Directory" details="Register faculty members, generate credentials, and send email confirmations." />} />

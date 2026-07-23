@@ -1,16 +1,16 @@
 import React from 'react';
-import { Eye, Edit2, Trash2, Building2 } from 'lucide-react';
+import { Eye, Edit2, Trash2, Building2, ChevronsUpDown } from 'lucide-react';
 import './DepartmentTable.css';
 
 /**
  * DepartmentTable Component
- * Renders the department list in a desktop-optimized tabular view with premium row hover highlights.
+ * Displays the departments in a premium table view with detailed hover actions, status gradients, and sorted row transitions.
  * 
  * @param {Object} props
- * @param {Array} props.departments - Array of filtered department objects
- * @param {Function} props.onView - Action handler for view click
- * @param {Function} props.onEdit - Action handler for edit click
- * @param {Function} props.onDelete - Action handler for delete click
+ * @param {Array} props.departments - Filtered list of departments
+ * @param {Function} props.onView - Handler for viewing a department
+ * @param {Function} props.onEdit - Handler for editing a department
+ * @param {Function} props.onDelete - Handler for deleting a department
  */
 export default function DepartmentTable({
   departments = [],
@@ -23,15 +23,40 @@ export default function DepartmentTable({
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-500">
-              <th className="py-4.5 px-6">Code</th>
-              <th className="py-4.5 px-6">Department Name</th>
-              <th className="py-4.5 px-6">HOD Name</th>
-              <th className="py-4.5 px-6 text-center">Teachers</th>
-              <th className="py-4.5 px-6 text-center">Students</th>
-              <th className="py-4.5 px-6 text-center">Status</th>
-              <th className="py-4.5 px-6">Created Date</th>
-              <th className="py-4.5 px-6 text-right">Actions</th>
+            <tr className="bg-slate-50/75 border-b border-slate-200 text-xs font-extrabold uppercase tracking-wider text-slate-500">
+              <th className="py-4 px-6 font-extrabold">
+                <div className="flex items-center gap-1">
+                  <span>Code</span>
+                  <ChevronsUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+                </div>
+              </th>
+              <th className="py-4 px-6 font-extrabold">
+                <div className="flex items-center gap-1">
+                  <span>Department Name</span>
+                  <ChevronsUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+                </div>
+              </th>
+              <th className="py-4 px-6 font-extrabold">
+                <div className="flex items-center gap-1">
+                  <span>HOD Name</span>
+                  <ChevronsUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+                </div>
+              </th>
+              <th className="py-4 px-6 font-extrabold text-center">
+                <div className="flex items-center justify-center gap-1">
+                  <span>Teachers</span>
+                  <ChevronsUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+                </div>
+              </th>
+              <th className="py-4 px-6 font-extrabold text-center">
+                <div className="flex items-center justify-center gap-1">
+                  <span>Students</span>
+                  <ChevronsUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+                </div>
+              </th>
+              <th className="py-4 px-6 font-extrabold text-center">Status</th>
+              <th className="py-4 px-6 font-extrabold">Created Date</th>
+              <th className="py-4 px-6 text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 text-sm font-semibold text-slate-700">
@@ -41,7 +66,7 @@ export default function DepartmentTable({
               return (
                 <tr
                   key={dept.code}
-                  className="hover:bg-slate-50/70 transition-colors duration-150 group"
+                  className="hover:bg-blue-50/15 hover:shadow-2xs transition-all duration-300 ease-in-out group"
                 >
                   {/* Department Code */}
                   <td className="py-4 px-6 font-bold text-slate-900">
@@ -53,10 +78,11 @@ export default function DepartmentTable({
                   {/* Department Name */}
                   <td className="py-4 px-6">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100/60">
-                        <Building2 className="w-4 h-4" />
+                      {/* Premium Department Icon with Soft Gradient and Glow */}
+                      <div className="w-8.5 h-8.5 rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-600 text-white flex items-center justify-center shadow-md shadow-blue-500/20 transition-transform duration-300 group-hover:scale-105 shrink-0">
+                        <Building2 className="w-4.5 h-4.5" />
                       </div>
-                      <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors duration-150">
+                      <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors duration-250">
                         {dept.name}
                       </span>
                     </div>
@@ -77,17 +103,17 @@ export default function DepartmentTable({
                     {dept.totalStudents}
                   </td>
 
-                  {/* Status Badge */}
+                  {/* Status Badge with soft gradient and glow */}
                   <td className="py-4 px-6 text-center">
-                    <span
-                      className={`inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-extrabold border shadow-2xs leading-none ${
-                        isActive
-                          ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                          : 'bg-slate-100 text-slate-500 border-slate-200'
-                      }`}
-                    >
-                      {dept.status}
-                    </span>
+                    {isActive ? (
+                      <span className="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-extrabold border bg-gradient-to-r from-emerald-500/8 to-teal-500/5 text-emerald-700 border-emerald-200/60 shadow-[0_2px_8px_-1px_rgba(16,185,129,0.12)] leading-none">
+                        Active
+                      </span>
+                    ) : (
+                      <span className="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-extrabold border bg-gradient-to-r from-slate-400/8 to-slate-500/5 text-slate-500 border-slate-200/60 shadow-[0_2px_8px_-1px_rgba(100,116,139,0.08)] leading-none">
+                        Inactive
+                      </span>
+                    )}
                   </td>
 
                   {/* Created Date */}
@@ -97,33 +123,33 @@ export default function DepartmentTable({
 
                   {/* Action Buttons */}
                   <td className="py-4 px-6 text-right">
-                    <div className="flex items-center justify-end gap-1.5">
-                      {/* View */}
+                    <div className="flex items-center justify-end gap-2">
+                      {/* View Button */}
                       <button
                         type="button"
                         onClick={() => onView(dept)}
-                        className="p-1.5 rounded-lg border border-slate-100 hover:border-blue-100 text-slate-400 hover:text-blue-600 hover:bg-blue-50/50 transition-all cursor-pointer shadow-2xs"
-                        title="View Department details"
+                        className="w-8 h-8 rounded-lg border border-slate-200/80 bg-slate-50 hover:bg-blue-50 text-slate-400 hover:text-blue-600 hover:border-blue-200 flex items-center justify-center transition-all duration-200 cursor-pointer shadow-2xs active:scale-90"
+                        title="View details"
                       >
                         <Eye className="w-4 h-4" />
                       </button>
 
-                      {/* Edit */}
+                      {/* Edit Button */}
                       <button
                         type="button"
                         onClick={() => onEdit(dept)}
-                        className="p-1.5 rounded-lg border border-slate-100 hover:border-indigo-100 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50/50 transition-all cursor-pointer shadow-2xs"
-                        title="Edit Department details"
+                        className="w-8 h-8 rounded-lg border border-slate-200/80 bg-slate-50 hover:bg-amber-50 text-slate-400 hover:text-amber-600 hover:border-amber-200 flex items-center justify-center transition-all duration-200 cursor-pointer shadow-2xs active:scale-90"
+                        title="Edit details"
                       >
                         <Edit2 className="w-4 h-4" />
                       </button>
 
-                      {/* Delete */}
+                      {/* Delete Button */}
                       <button
                         type="button"
                         onClick={() => onDelete(dept)}
-                        className="p-1.5 rounded-lg border border-slate-100 hover:border-red-100 text-slate-400 hover:text-red-600 hover:bg-red-50/50 transition-all cursor-pointer shadow-2xs"
-                        title="Delete Department"
+                        className="w-8 h-8 rounded-lg border border-slate-200/80 bg-slate-50 hover:bg-red-50 text-slate-400 hover:text-red-600 hover:border-red-200 flex items-center justify-center transition-all duration-200 cursor-pointer shadow-2xs active:scale-90"
+                        title="Delete record"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
