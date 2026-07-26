@@ -7,6 +7,7 @@ import Courses from './pages/admin/Courses';
 import Subjects from './pages/admin/Subjects';
 import Teachers from './pages/admin/Teachers';
 import Students from './pages/admin/Students';
+import Classes from './pages/admin/Classes';
 
 /**
  * Placeholder Page Component for other sub-routes until implemented
@@ -61,7 +62,7 @@ export default function App() {
           <Route path="/admin/subjects" element={<Subjects />} />
           <Route path="/admin/teachers" element={<Teachers />} />
           <Route path="/admin/students" element={<Students />} />
-          <Route path="/admin/classes" element={<PlaceholderPage title="Class Management" details="Create class sections, set capacity limits, and assign classrooms." />} />
+          <Route path="/admin/classes" element={<Classes />} />
           <Route path="/admin/schedule" element={<PlaceholderPage title="Timetable & Schedule" details="Schedule class period slots and resolve teacher timetable conflicts." />} />
           <Route path="/admin/attendance" element={<PlaceholderPage title="Attendance Overview" details="View system-wide student attendance reports and low-attendance alerts." />} />
           <Route path="/admin/results" element={<PlaceholderPage title="Results Management" details="Single entry or bulk Excel upload (.xlsx) and result publishing." />} />
