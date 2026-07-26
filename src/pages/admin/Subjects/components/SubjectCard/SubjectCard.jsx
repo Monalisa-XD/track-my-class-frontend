@@ -57,12 +57,12 @@ export default function SubjectCard({
       <div className="grid grid-cols-2 gap-3.5 py-3 border-y border-slate-100 text-xs font-semibold text-slate-600">
         <div className="space-y-1">
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Semester & Credits</span>
-          <p className="text-slate-700 truncate">{subject.semester} • {subject.credits} HP</p>
+          <p className="text-slate-700 truncate">{subject.semester} • {subject.credits} Credits</p>
         </div>
 
         <div className="space-y-1">
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Type</span>
-          <p className="text-slate-700 truncate">{isLab ? 'Lab / Practical' : 'Theory Lecture'}</p>
+          <p className="text-slate-700 truncate">{isLab ? '🧪 Lab' : '📘 Theory'}</p>
         </div>
 
         <div className="space-y-1 col-span-2">

@@ -159,19 +159,19 @@ export default function SubjectTable({
                   {/* Subject Type (Theory/Lab) */}
                   <td className="py-4 px-6 text-center">
                     {isLab ? (
-                      <span className="inline-flex px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
-                        Lab / Practical
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                        🧪 Lab
                       </span>
                     ) : (
-                      <span className="inline-flex px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-100">
-                        Theory Lecture
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-100">
+                        📘 Theory
                       </span>
                     )}
                   </td>
 
                   {/* Credits */}
                   <td className="py-4 px-6 text-center font-bold text-slate-850">
-                    {sub.credits} HP
+                    {sub.credits} Credits
                   </td>
 
                   {/* Status Badge */}
