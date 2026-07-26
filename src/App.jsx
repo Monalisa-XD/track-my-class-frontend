@@ -5,6 +5,7 @@ import AdminDashboard from './pages/admin/Dashboard';
 import Departments from './pages/admin/Departments';
 import Courses from './pages/admin/Courses';
 import Subjects from './pages/admin/Subjects';
+import Teachers from './pages/admin/Teachers';
 
 /**
  * Placeholder Page Component for other sub-routes until implemented
@@ -57,7 +58,7 @@ export default function App() {
           <Route path="/admin/departments" element={<Departments />} />
           <Route path="/admin/courses" element={<Courses />} />
           <Route path="/admin/subjects" element={<Subjects />} />
-          <Route path="/admin/teachers" element={<PlaceholderPage title="Teacher Directory" details="Register faculty members, generate credentials, and send email confirmations." />} />
+          <Route path="/admin/teachers" element={<Teachers />} />
           <Route path="/admin/students" element={<PlaceholderPage title="Student Directory" details="Manage student admissions, auto-generate registration numbers, and view profiles." />} />
           <Route path="/admin/classes" element={<PlaceholderPage title="Class Management" details="Create class sections, set capacity limits, and assign classrooms." />} />
           <Route path="/admin/schedule" element={<PlaceholderPage title="Timetable & Schedule" details="Schedule class period slots and resolve teacher timetable conflicts." />} />
