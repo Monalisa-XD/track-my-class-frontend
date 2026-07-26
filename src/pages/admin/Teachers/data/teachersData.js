@@ -12,7 +12,7 @@ export const initialTeachers = [
     experience: '15 Years',
     status: 'Active',
     joiningDate: '2015-06-15',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Satya',
+    avatar: null,
     subjects: ['Operating Systems Laboratory', 'Database Engineering']
   },
   {
@@ -25,7 +25,7 @@ export const initialTeachers = [
     experience: '12 Years',
     status: 'Active',
     joiningDate: '2018-07-10',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Kishore',
+    avatar: null,
     subjects: ['Analog Electronics', 'Signal Processing']
   },
   {
@@ -38,7 +38,7 @@ export const initialTeachers = [
     experience: '16 Years',
     status: 'Active',
     joiningDate: '2014-02-05',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Santosh',
+    avatar: null,
     subjects: ['Electrical Machines', 'Power Systems']
   },
   {
@@ -51,7 +51,7 @@ export const initialTeachers = [
     experience: '8 Years',
     status: 'Active',
     joiningDate: '2020-09-01',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Rockey',
+    avatar: null,
     subjects: ['Thermodynamics', 'Robotics']
   },
   {
@@ -64,7 +64,7 @@ export const initialTeachers = [
     experience: '10 Years',
     status: 'Inactive',
     joiningDate: '2019-01-20',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Prasad',
+    avatar: null,
     subjects: ['Concrete Technology', 'Structural Analysis']
   },
   {
@@ -77,7 +77,7 @@ export const initialTeachers = [
     experience: '7 Years',
     status: 'Active',
     joiningDate: '2021-03-15',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Rashmi',
+    avatar: null,
     subjects: ['Cloud Computing', 'Web Technology']
   },
   {
@@ -90,7 +90,7 @@ export const initialTeachers = [
     experience: '4 Years',
     status: 'Active',
     joiningDate: '2022-08-01',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Satyabrata',
+    avatar: null,
     subjects: ['Data Structure Using C', 'Software Engineering']
   }
 ];

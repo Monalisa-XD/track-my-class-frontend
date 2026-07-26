@@ -2,6 +2,32 @@ import React from 'react';
 import { X, Mail, Phone, Calendar, Award, Briefcase, BookOpen, GraduationCap, Building2 } from 'lucide-react';
 import './TeacherDetailsDrawer.css';
 
+const getInitials = (name) => {
+  if (!name) return '';
+  const cleanedName = name.replace(/^(Dr\.|Mr\.|Mrs\.|Ms\.)\s+/i, '');
+  const parts = cleanedName.split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return '';
+  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+  return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+};
+
+const renderAvatar = (avatarUrl, name, sizeClass = "w-20 h-20 text-xl") => {
+  if (avatarUrl) {
+    return (
+      <div className={`relative ${sizeClass} rounded-full bg-slate-100 overflow-hidden border-2 border-white shadow-md shrink-0`}>
+        <img src={avatarUrl} alt={name} className="w-full h-full object-cover" />
+      </div>
+    );
+  }
+  
+  const initials = getInitials(name);
+  return (
+    <div className={`relative ${sizeClass} rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 text-white flex items-center justify-center font-extrabold font-mono tracking-wider shadow-md border-2 border-white shrink-0`}>
+      {initials}
+    </div>
+  );
+};
+
 export default function TeacherDetailsDrawer({
   isOpen = false,
   onClose,
@@ -60,13 +86,7 @@ export default function TeacherDetailsDrawer({
                 )}
               </div>
 
-              <div className="w-20 h-20 rounded-full bg-slate-100 border-2 border-white shadow-md overflow-hidden relative">
-                <img 
-                  src={teacher.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${teacher.name}`} 
-                  alt={teacher.name}
-                  className="w-full h-full object-cover" 
-                />
-              </div>
+              {renderAvatar(teacher.avatar, teacher.name)}
 
               <h4 className="text-base font-bold text-slate-800 tracking-tight mt-3">
                 {teacher.name}

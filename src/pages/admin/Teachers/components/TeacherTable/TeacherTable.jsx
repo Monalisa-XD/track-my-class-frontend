@@ -2,6 +2,32 @@ import React from 'react';
 import { Eye, Edit2, Trash2, ChevronsUpDown, ChevronUp, ChevronDown } from 'lucide-react';
 import './TeacherTable.css';
 
+const getInitials = (name) => {
+  if (!name) return '';
+  const cleanedName = name.replace(/^(Dr\.|Mr\.|Mrs\.|Ms\.)\s+/i, '');
+  const parts = cleanedName.split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return '';
+  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+  return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+};
+
+const renderAvatar = (avatarUrl, name, sizeClass = "w-9 h-9 text-xs") => {
+  if (avatarUrl) {
+    return (
+      <div className={`relative ${sizeClass} rounded-full bg-slate-100 overflow-hidden border border-slate-200 shrink-0`}>
+        <img src={avatarUrl} alt={name} className="w-full h-full object-cover" />
+      </div>
+    );
+  }
+  
+  const initials = getInitials(name);
+  return (
+    <div className={`relative ${sizeClass} rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 text-white flex items-center justify-center font-extrabold font-mono tracking-wider shadow-sm border border-blue-200/20 shrink-0`}>
+      {initials}
+    </div>
+  );
+};
+
 export default function TeacherTable({
   teachers = [],
   sortBy = 'name-asc',
@@ -113,13 +139,7 @@ export default function TeacherTable({
                   {/* Profile Avatar & Name */}
                   <td className="py-4 px-6">
                     <div className="flex items-center gap-3">
-                      <div className="relative w-9 h-9 rounded-full bg-slate-100 overflow-hidden border border-slate-200 shrink-0">
-                        <img 
-                          src={tch.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${tch.name}`} 
-                          alt={tch.name} 
-                          className="w-full h-full object-cover" 
-                        />
-                      </div>
+                      {renderAvatar(tch.avatar, tch.name)}
                       <div>
                         <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors duration-250 block">
                           {tch.name}
