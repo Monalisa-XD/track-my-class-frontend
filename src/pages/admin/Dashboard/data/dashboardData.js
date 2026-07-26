@@ -180,7 +180,7 @@ export const dashboardData = {
       status: 'SUCCESS',
       icon: Users,
       iconBg: 'bg-emerald-500 text-white shadow-emerald-500/30',
-      badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200'
+      badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-300 shadow-[0_0_8px_rgba(16,185,129,0.12)]'
     },
     {
       id: 'act-2',
@@ -192,7 +192,7 @@ export const dashboardData = {
       status: 'COMPLETED',
       icon: ClipboardCheck,
       iconBg: 'bg-blue-500 text-white shadow-blue-500/30',
-      badgeBg: 'bg-blue-50 text-blue-700 border-blue-200'
+      badgeBg: 'bg-blue-50 text-blue-700 border-blue-300 shadow-[0_0_8px_rgba(59,130,246,0.12)]'
     },
     {
       id: 'act-3',
@@ -204,7 +204,7 @@ export const dashboardData = {
       status: 'PUBLISHED',
       icon: Award,
       iconBg: 'bg-amber-500 text-white shadow-amber-500/30',
-      badgeBg: 'bg-amber-50 text-amber-700 border-amber-200'
+      badgeBg: 'bg-amber-50 text-amber-700 border-amber-300 shadow-[0_0_8px_rgba(245,158,11,0.12)]'
     },
     {
       id: 'act-4',
@@ -216,7 +216,7 @@ export const dashboardData = {
       status: 'SUCCESS',
       icon: UserPlus,
       iconBg: 'bg-cyan-500 text-white shadow-cyan-500/30',
-      badgeBg: 'bg-cyan-50 text-cyan-700 border-cyan-200'
+      badgeBg: 'bg-cyan-50 text-cyan-700 border-cyan-300 shadow-[0_0_8px_rgba(6,182,212,0.12)]'
     },
     {
       id: 'act-5',
@@ -228,7 +228,7 @@ export const dashboardData = {
       status: 'UPDATED',
       icon: Calendar,
       iconBg: 'bg-indigo-500 text-white shadow-indigo-500/30',
-      badgeBg: 'bg-indigo-50 text-indigo-700 border-indigo-200'
+      badgeBg: 'bg-indigo-50 text-indigo-700 border-indigo-300 shadow-[0_0_8px_rgba(99,102,241,0.12)]'
     },
     {
       id: 'act-6',
@@ -240,7 +240,7 @@ export const dashboardData = {
       status: 'SUCCESS',
       icon: Building2,
       iconBg: 'bg-blue-600 text-white shadow-blue-500/30',
-      badgeBg: 'bg-blue-50 text-blue-700 border-blue-200'
+      badgeBg: 'bg-blue-50 text-blue-700 border-blue-300 shadow-[0_0_8px_rgba(59,130,246,0.12)]'
     },
     {
       id: 'act-7',
@@ -252,7 +252,7 @@ export const dashboardData = {
       status: 'SUCCESS',
       icon: BookOpen,
       iconBg: 'bg-purple-500 text-white shadow-purple-500/30',
-      badgeBg: 'bg-purple-50 text-purple-700 border-purple-200'
+      badgeBg: 'bg-purple-50 text-purple-700 border-purple-300 shadow-[0_0_8px_rgba(168,85,247,0.12)]'
     }
   ],
   quickActions: [

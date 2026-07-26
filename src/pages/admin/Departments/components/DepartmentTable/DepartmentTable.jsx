@@ -54,15 +54,15 @@ export default function DepartmentTable({
 
   return (
     <div className="hidden md:block w-full overflow-hidden bg-white rounded-2xl border border-slate-200/80 shadow-ambient select-none">
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto max-h-[580px] overflow-y-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-slate-50/75 border-b border-slate-200 text-xs font-extrabold uppercase tracking-wider text-slate-500">
+            <tr className="bg-slate-50 border-b border-slate-200 text-xs font-extrabold uppercase tracking-wider text-slate-500">
               
               {/* Code Sort Header */}
               <th 
                 onClick={() => handleHeaderClick('code')}
-                className="py-4 px-6 font-extrabold cursor-pointer group/header hover:bg-slate-100/50 hover:text-slate-700 transition-colors select-none"
+                className="sticky top-0 z-10 bg-slate-50 border-b border-slate-200 py-4 px-6 font-extrabold cursor-pointer group/header hover:bg-slate-100/50 hover:text-slate-700 transition-colors select-none"
               >
                 <div className="flex items-center gap-1">
                   <span>Code</span>
@@ -73,7 +73,7 @@ export default function DepartmentTable({
               {/* Name Sort Header */}
               <th 
                 onClick={() => handleHeaderClick('name')}
-                className="py-4 px-6 font-extrabold cursor-pointer group/header hover:bg-slate-100/50 hover:text-slate-700 transition-colors select-none"
+                className="sticky top-0 z-10 bg-slate-50 border-b border-slate-200 py-4 px-6 font-extrabold cursor-pointer group/header hover:bg-slate-100/50 hover:text-slate-700 transition-colors select-none"
               >
                 <div className="flex items-center gap-1">
                   <span>Department Name</span>
@@ -82,14 +82,14 @@ export default function DepartmentTable({
               </th>
 
               {/* HOD Header */}
-              <th className="py-4 px-6 font-extrabold">
+              <th className="sticky top-0 z-10 bg-slate-50 border-b border-slate-200 py-4 px-6 font-extrabold">
                 <span>HOD Name</span>
               </th>
 
               {/* Teachers Header */}
               <th 
                 onClick={() => handleHeaderClick('teachers')}
-                className="py-4 px-6 font-extrabold text-center cursor-pointer group/header hover:bg-slate-100/50 hover:text-slate-700 transition-colors select-none"
+                className="sticky top-0 z-10 bg-slate-50 border-b border-slate-200 py-4 px-6 font-extrabold text-center cursor-pointer group/header hover:bg-slate-100/50 hover:text-slate-700 transition-colors select-none"
               >
                 <div className="flex items-center justify-center gap-1">
                   <span>Teachers</span>
@@ -100,7 +100,7 @@ export default function DepartmentTable({
               {/* Students Header */}
               <th 
                 onClick={() => handleHeaderClick('students')}
-                className="py-4 px-6 font-extrabold text-center cursor-pointer group/header hover:bg-slate-100/50 hover:text-slate-700 transition-colors select-none"
+                className="sticky top-0 z-10 bg-slate-50 border-b border-slate-200 py-4 px-6 font-extrabold text-center cursor-pointer group/header hover:bg-slate-100/50 hover:text-slate-700 transition-colors select-none"
               >
                 <div className="flex items-center justify-center gap-1">
                   <span>Students</span>
@@ -109,12 +109,12 @@ export default function DepartmentTable({
               </th>
 
               {/* Status Header */}
-              <th className="py-4 px-6 font-extrabold text-center">Status</th>
+              <th className="sticky top-0 z-10 bg-slate-50 border-b border-slate-200 py-4 px-6 font-extrabold text-center">Status</th>
               
               {/* Created Date Header */}
-              <th className="py-4 px-6 font-extrabold">Created Date</th>
+              <th className="sticky top-0 z-10 bg-slate-50 border-b border-slate-200 py-4 px-6 font-extrabold">Created Date</th>
               
-              <th className="py-4 px-6 text-right">Actions</th>
+              <th className="sticky top-0 z-10 bg-slate-50 border-b border-slate-200 py-4 px-6 text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 text-sm font-semibold text-slate-700">
@@ -124,7 +124,7 @@ export default function DepartmentTable({
               return (
                 <tr
                   key={dept.code}
-                  className="hover:bg-blue-50/15 hover:shadow-2xs transition-all duration-300 ease-in-out group"
+                  className="odd:bg-white even:bg-slate-50/30 hover:bg-blue-50/30 transition-colors duration-200 group"
                 >
                   {/* Department Code */}
                   <td className="py-4 px-6 font-bold text-slate-900">
@@ -164,11 +164,11 @@ export default function DepartmentTable({
                   {/* Status Badge with soft gradient and glow */}
                   <td className="py-4 px-6 text-center">
                     {isActive ? (
-                      <span className="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-extrabold border bg-gradient-to-r from-emerald-500/8 to-teal-500/5 text-emerald-700 border-emerald-200/60 shadow-[0_2px_8px_-1px_rgba(16,185,129,0.12)] leading-none">
+                      <span className="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-extrabold border bg-gradient-to-r from-emerald-500/8 to-teal-500/5 text-emerald-700 border-emerald-300 shadow-[0_0_8px_rgba(16,185,129,0.18)] leading-none shrink-0">
                         Active
                       </span>
                     ) : (
-                      <span className="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-extrabold border bg-gradient-to-r from-slate-400/8 to-slate-500/5 text-slate-500 border-slate-200/60 shadow-[0_2px_8px_-1px_rgba(100,116,139,0.08)] leading-none">
+                      <span className="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-extrabold border bg-gradient-to-r from-slate-400/8 to-slate-500/5 text-slate-500 border-slate-300 shadow-[0_0_8px_rgba(148,163,184,0.12)] leading-none shrink-0">
                         Inactive
                       </span>
                     )}

@@ -129,7 +129,7 @@ export default function DepartmentStats({ departments = [] }) {
                 </span>
               </div>
               
-              <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight leading-none mt-1">
+              <h3 className="text-3xl font-black text-slate-900 tracking-tight leading-none mt-1">
                 {card.value}
               </h3>
               <p className="text-xs text-slate-500 font-semibold truncate mt-1">

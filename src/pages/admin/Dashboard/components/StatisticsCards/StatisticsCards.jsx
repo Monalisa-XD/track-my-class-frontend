@@ -15,6 +15,18 @@ const GLOW_CLASSES = {
 };
 
 /**
+ * Color-matched badge classes with stronger borders and subtle glows
+ */
+const BADGE_CLASSES = {
+  blue: 'bg-blue-50 text-blue-700 border-blue-300 shadow-[0_0_8px_rgba(59,130,246,0.12)]',
+  indigo: 'bg-indigo-50 text-indigo-700 border-indigo-300 shadow-[0_0_8px_rgba(99,102,241,0.12)]',
+  purple: 'bg-purple-50 text-purple-700 border-purple-300 shadow-[0_0_8px_rgba(168,85,247,0.12)]',
+  emerald: 'bg-emerald-50 text-emerald-700 border-emerald-300 shadow-[0_0_8px_rgba(16,185,129,0.12)]',
+  cyan: 'bg-cyan-50 text-cyan-700 border-cyan-300 shadow-[0_0_8px_rgba(6,182,212,0.12)]',
+  amber: 'bg-amber-50 text-amber-700 border-amber-300 shadow-[0_0_8px_rgba(245,158,11,0.12)]'
+};
+
+/**
  * StatisticsCards Component
  * Premium executive summary metric cards with lift-on-hover, subtle colored glow, and inner top highlight.
  * 
@@ -57,7 +69,7 @@ export default function StatisticsCards({ items = [] }) {
                 {card.title}
               </span>
               <div className="flex items-baseline gap-2">
-                <h3 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+                <h3 className="text-4xl font-black text-slate-900 tracking-tight leading-none">
                   {card.value.toLocaleString()}
                 </h3>
               </div>
@@ -68,7 +80,7 @@ export default function StatisticsCards({ items = [] }) {
               <span className="font-semibold text-slate-500 truncate">
                 {card.subtitle}
               </span>
-              <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold border shadow-2xs ${card.bgColor}`}>
+              <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-extrabold border leading-none shrink-0 ${BADGE_CLASSES[card.color] || BADGE_CLASSES.blue}`}>
                 Active
               </span>
             </div>

@@ -4,9 +4,9 @@ import { Calendar, ArrowRight, Clock, MapPin, UserCheck, BookOpen } from 'lucide
 import './TodaySchedule.css';
 
 const STATUS_CONFIG = {
-  ONGOING: { label: 'Ongoing', badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200 shadow-emerald-500/10', isLive: true },
-  UPCOMING: { label: 'Upcoming', badgeBg: 'bg-blue-50 text-blue-700 border-blue-200 shadow-blue-500/10', isLive: false },
-  COMPLETED: { label: 'Completed', badgeBg: 'bg-slate-100 text-slate-600 border-slate-200', isLive: false }
+  ONGOING: { label: 'Ongoing', badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-300 shadow-[0_0_8px_rgba(16,185,129,0.18)]', isLive: true },
+  UPCOMING: { label: 'Upcoming', badgeBg: 'bg-blue-50 text-blue-700 border-blue-300 shadow-[0_0_8px_rgba(59,130,246,0.18)]', isLive: false },
+  COMPLETED: { label: 'Completed', badgeBg: 'bg-slate-100 text-slate-600 border-slate-300/80 shadow-[0_0_8px_rgba(148,163,184,0.12)]', isLive: false }
 };
 
 export default function TodaySchedule({ schedule = [] }) {
