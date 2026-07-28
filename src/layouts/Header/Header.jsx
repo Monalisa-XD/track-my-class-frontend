@@ -65,6 +65,7 @@ const ROUTE_META = {
     title: 'Attendance Records',
     description: 'Track, mark, and monitor daily period-wise student attendance.',
     actions: {
+      ADMIN: { label: 'Mark Attendance', actionKey: 'MARK_ATTENDANCE' },
       TEACHER: { label: 'Mark Attendance', actionKey: 'MARK_ATTENDANCE' }
     }
   },
