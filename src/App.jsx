@@ -25,6 +25,7 @@ import StudentResults from './pages/student/results';
 import StudentSyllabus from './pages/student/syllabus';
 import StudentResources from './pages/student/resources';
 import StudentProfile from './pages/student/profile';
+import Login from './pages/auth/login';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -65,16 +66,20 @@ function PlaceholderPage({ title, details }) {
 }
 
 export default function App() {
-  // Production Auth State: Automatically determined upon login
-  const [currentUser] = useState({
-    name: 'Prasad Kumar Rauta',
-    email: 'student@vssut.ac.in',
-    regNo: '25061011510037',
-    role: 'STUDENT'
+  // Production Auth State: Load from localStorage
+  const [currentUser, setCurrentUser] = useState(() => {
+    const saved = localStorage.getItem('user');
+    return saved ? JSON.parse(saved) : null;
   });
 
+  const handleLogin = (user) => {
+    localStorage.setItem('user', JSON.stringify(user));
+    setCurrentUser(user);
+  };
+
   const handleLogout = () => {
-    console.log('User logged out');
+    localStorage.removeItem('user');
+    setCurrentUser(null);
   };
 
   const handleHeaderAction = (actionKey) => {
@@ -85,18 +90,35 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Public Login Route */}
+        <Route 
+          path="/login" 
+          element={
+            currentUser ? (
+              <Navigate to={`/${currentUser.role.toLowerCase()}/dashboard`} replace />
+            ) : (
+              <Login onLogin={handleLogin} />
+            )
+          } 
+        />
+
         {/* Protected Application Shell wrapped in MainLayout */}
         <Route
           element={
-            <MainLayout
-              user={currentUser}
-              onLogout={handleLogout}
-              onHeaderAction={handleHeaderAction}
-            />
+            currentUser ? (
+              <MainLayout
+                user={currentUser}
+                onLogout={handleLogout}
+                onHeaderAction={handleHeaderAction}
+              />
+            ) : (
+              <Navigate to="/login" replace />
+            )
           }
         >
           {/* Default Redirect */}
-          <Route path="/" element={<Navigate to={`/${currentUser.role.toLowerCase()}/dashboard`} replace />} />
+          <Route path="/" element={<Navigate to={`/${currentUser?.role.toLowerCase()}/dashboard`} replace />} />
+
 
           {/* Admin Routes */}
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
