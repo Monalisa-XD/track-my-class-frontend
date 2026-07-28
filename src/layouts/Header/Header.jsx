@@ -85,9 +85,7 @@ const ROUTE_META = {
   resources: {
     title: 'Study Resources',
     description: 'Upload, manage, and download class study materials, PPTs, and notes.',
-    actions: {
-      TEACHER: { label: 'Upload Resource', actionKey: 'UPLOAD_RESOURCE' }
-    }
+    actions: {}
   },
   profile: {
     title: 'User Profile & Account',
