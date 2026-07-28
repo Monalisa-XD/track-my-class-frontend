@@ -194,7 +194,12 @@ export default function AttendancePage() {
     <div className="space-y-6">
       
       {/* Dynamic stats overview section */}
-      <AttendanceStats records={records} />
+      <div className="space-y-3">
+        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500">
+          Attendance Overview
+        </h3>
+        <AttendanceStats records={records} />
+      </div>
 
       {/* Toolbar filters controls */}
       <AttendanceFilters
