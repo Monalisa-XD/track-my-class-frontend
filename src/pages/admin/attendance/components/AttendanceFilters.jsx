@@ -41,7 +41,7 @@ export default function AttendanceFilters({
       <div className="flex flex-col sm:flex-row sm:items-center gap-3 flex-1 flex-wrap">
         
         {/* Search Input field */}
-        <div className="relative flex-1 min-w-[220px] max-w-[280px]">
+        <div className="relative flex-1 min-w-[220px] max-w-[290px]">
           <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
             <Search className="w-4.5 h-4.5" />
           </span>
@@ -49,7 +49,7 @@ export default function AttendanceFilters({
             type="text"
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Search by Student, Roll No, or Class..."
+            placeholder="Search by Student or Roll No..."
             className="w-full pl-10 pr-10 py-2.5 text-xs bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 rounded-xl outline-none transition-all duration-200 font-medium text-slate-800 placeholder-slate-400"
           />
           {searchTerm && (

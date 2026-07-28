@@ -234,7 +234,7 @@ export default function AttendancePage() {
 
             <div className="space-y-1.5">
               <h3 className="text-lg font-bold text-slate-800 tracking-tight">
-                {isSearchActive ? 'No Attendance Found' : 'No Records Configured'}
+                No attendance records found.
               </h3>
               <p className="text-sm text-slate-500 font-medium max-w-sm leading-relaxed">
                 {isSearchActive

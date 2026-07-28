@@ -21,7 +21,7 @@ export default function AttendanceStatusBadge({ status }) {
   }
 
   return (
-    <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-extrabold border bg-gradient-to-r ${badgeClasses} leading-none shrink-0`}>
+    <span className={`inline-flex w-18 justify-center py-0.5 rounded-full text-[10px] font-extrabold border bg-gradient-to-r ${badgeClasses} leading-none shrink-0`}>
       {status}
     </span>
   );

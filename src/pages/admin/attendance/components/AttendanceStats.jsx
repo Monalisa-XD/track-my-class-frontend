@@ -84,14 +84,14 @@ export default function AttendanceStats({ records = [] }) {
         return (
           <div
             key={card.id}
-            className={`group relative bg-white p-5 rounded-2xl border border-slate-200/80 shadow-ambient inner-highlight transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-ambient-hover flex flex-row items-center gap-4 overflow-hidden ${glowClass}`}
+            className={`group relative bg-white p-5 rounded-2xl border border-slate-200/80 shadow-ambient inner-highlight transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-ambient-hover flex flex-row items-center gap-4 overflow-hidden ${glowClass}`}
           >
             {/* Subtle Inner Top Glow Highlight */}
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200/50 to-transparent opacity-60" />
 
             {/* Gradient Icon pill */}
             <div
-              className={`w-12 h-12 rounded-xl bg-gradient-to-tr text-white flex items-center justify-center shrink-0 shadow-lg transition-all duration-300 group-hover:scale-105 ${gradientClass}`}
+              className={`w-12 h-12 rounded-xl bg-gradient-to-tr text-white flex items-center justify-center shrink-0 shadow-md group-hover:shadow-xl transition-all duration-300 group-hover:scale-105 ${gradientClass}`}
             >
               <IconComponent className="w-6 h-6" />
             </div>

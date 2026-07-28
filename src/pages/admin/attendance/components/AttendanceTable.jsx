@@ -138,15 +138,15 @@ export default function AttendanceTable({
               return (
                 <tr
                   key={`${item.rollNo}-${item.subject}-${item.date}`}
-                  className="odd:bg-white even:bg-slate-50/30 hover:bg-blue-50/45 hover:shadow-[0_4px_12px_-2px_rgba(37,99,235,0.06)] transition-all duration-200 group"
+                  className="odd:bg-white even:bg-slate-50/30 hover:bg-blue-50/50 hover:shadow-[0_4px_16px_-4px_rgba(37,99,235,0.08)] transition-all duration-220 group"
                 >
                   {/* Roll No */}
-                  <td className="py-4 px-5 font-bold text-slate-900 font-mono text-xs">
+                  <td className="py-5.5 px-5 font-bold text-slate-900 font-mono text-xs">
                     {item.rollNo}
                   </td>
 
                   {/* Student Name */}
-                  <td className="py-4 px-5">
+                  <td className="py-5.5 px-5">
                     <div className="flex items-center gap-2">
                       {renderStudentAvatar(item.studentName)}
                       <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors duration-250">
@@ -156,58 +156,68 @@ export default function AttendanceTable({
                   </td>
 
                   {/* Department */}
-                  <td className="py-4 px-5">
+                  <td className="py-5.5 px-5">
                     <span className="inline-flex items-center justify-center px-2.5 py-0.5 text-[10px] font-extrabold rounded-md bg-slate-100 text-slate-600 border border-slate-200">
                       {item.department}
                     </span>
                   </td>
 
                   {/* Course */}
-                  <td className="py-4 px-5">
+                  <td className="py-5.5 px-5">
                     <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-extrabold rounded-md bg-blue-50 text-blue-700 border border-blue-100">
                       {item.course}
                     </span>
                   </td>
 
                   {/* Semester */}
-                  <td className="py-4 px-5 text-slate-500 text-xs font-semibold">
+                  <td className="py-5.5 px-5 text-slate-500 text-xs font-semibold">
                     {item.semester}
                   </td>
 
                   {/* Subject */}
-                  <td className="py-4 px-5 text-slate-800 font-bold truncate max-w-[150px]" title={item.subject}>
+                  <td className="py-5.5 px-5 text-slate-800 font-bold truncate max-w-[150px]" title={item.subject}>
                     {item.subject}
                   </td>
 
                   {/* Teacher */}
-                  <td className="py-4 px-5 text-slate-600 font-semibold truncate max-w-[150px]" title={item.teacher}>
+                  <td className="py-5.5 px-5 text-slate-600 font-semibold truncate max-w-[150px]" title={item.teacher}>
                     {item.teacher}
                   </td>
 
                   {/* Date */}
-                  <td className="py-4 px-5 text-slate-600 font-semibold font-mono text-xs whitespace-nowrap">
+                  <td className="py-5.5 px-5 text-slate-600 font-semibold font-mono text-xs whitespace-nowrap">
                     {item.date}
                   </td>
 
                   {/* Attendance Status Badge */}
-                  <td className="py-4 px-5 text-center">
+                  <td className="py-5.5 px-5 text-center">
                     <AttendanceStatusBadge status={item.status} />
                   </td>
 
                   {/* Time */}
-                  <td className="py-4 px-5 text-slate-600 font-semibold font-mono text-xs whitespace-nowrap">
+                  <td className="py-5.5 px-5 text-slate-600 font-semibold font-mono text-xs whitespace-nowrap">
                     {item.time}
                   </td>
 
-                  {/* Attendance Percentage */}
-                  <td className="py-4 px-5 text-center font-bold font-mono">
-                    <span className={isLowAttendance ? 'text-red-500 font-black' : 'text-slate-800'}>
-                      {item.percentage}%
-                    </span>
+                  {/* Attendance Percentage with Mini Progress Bar */}
+                  <td className="py-5.5 px-5 text-center">
+                    <div className="flex flex-col items-center justify-center space-y-1">
+                      <span className={`font-bold font-mono text-xs ${isLowAttendance ? 'text-rose-600 font-black' : 'text-slate-850'}`}>
+                        {item.percentage}%
+                      </span>
+                      <div className="w-16 h-1 bg-slate-100 rounded-full overflow-hidden shrink-0">
+                        <div
+                          className={`h-full rounded-full transition-all duration-500 ${
+                            isLowAttendance ? 'bg-rose-500' : 'bg-blue-500'
+                          }`}
+                          style={{ width: `${item.percentage}%` }}
+                        />
+                      </div>
+                    </div>
                   </td>
 
                   {/* Actions */}
-                  <td className="py-4 px-5 text-right">
+                  <td className="py-5.5 px-5 text-right">
                     <AttendanceActions
                       item={item}
                       onView={onView}
