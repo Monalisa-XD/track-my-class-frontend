@@ -17,11 +17,12 @@ import {
   GraduationCap, 
   Camera, 
   X, 
-  CheckCircle,
+  CheckCircle2,
   HelpCircle,
   Laptop,
   CheckSquare,
-  Square
+  Square,
+  Percent
 } from 'lucide-react';
 import { teacherProfileData } from './data/profileData';
 import './TeacherProfile.css';
@@ -123,7 +124,7 @@ export default function TeacherProfile() {
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
                 <h2 className="text-xl md:text-2xl font-extrabold tracking-tight">{teacher.name}</h2>
                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-250 border border-emerald-400/30 shadow-inner animate-pulse">
-                  <CheckCircle className="w-3 h-3 text-emerald-300" />
+                  <CheckCircle2 className="w-3 h-3 text-emerald-300" />
                   Active Faculty
                 </span>
               </div>

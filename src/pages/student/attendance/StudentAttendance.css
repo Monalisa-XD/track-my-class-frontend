@@ -1,0 +1,19 @@
+/* Custom styles for Student Attendance page */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.student-card-fade {
+  animation: fadeInUp 0.25s ease-out forwards;
+}
+
+.shadow-purple-ambient {
+  box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.12), 0 1px 3px -1px rgba(139, 92, 246, 0.05);
+}

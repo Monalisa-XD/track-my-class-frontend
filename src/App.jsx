@@ -18,6 +18,39 @@ import TeacherStudents from './pages/teacher/students';
 import TeacherResources from './pages/teacher/resources';
 import TeacherResults from './pages/teacher/results';
 import TeacherProfile from './pages/teacher/profile';
+import StudentDashboard from './pages/student/dashboard';
+import StudentSchedule from './pages/student/schedule';
+import StudentAttendance from './pages/student/attendance';
+import StudentResults from './pages/student/results';
+import StudentSyllabus from './pages/student/syllabus';
+import StudentResources from './pages/student/resources';
+import StudentProfile from './pages/student/profile';
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+  componentDidCatch(error, errorInfo) {
+    console.error("ErrorBoundary caught an error", error, errorInfo);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="p-6 bg-red-50 border border-red-200 rounded-xl text-red-800 space-y-2 select-text">
+          <h2 className="text-lg font-bold">Something went wrong.</h2>
+          <pre className="text-xs font-mono bg-red-100 p-4 rounded-lg overflow-auto">
+            {this.state.error?.stack || this.state.error?.toString()}
+          </pre>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 /**
  * Placeholder Page Component for other sub-routes until implemented
@@ -34,10 +67,10 @@ function PlaceholderPage({ title, details }) {
 export default function App() {
   // Production Auth State: Automatically determined upon login
   const [currentUser] = useState({
-    name: 'Dr. Satya Prakash Sahoo',
-    email: 'satya@vssut.ac.in',
-    regNo: 'VSSUT-FAC-0041',
-    role: 'TEACHER' // Switch to 'ADMIN' | 'STUDENT' as needed
+    name: 'Prasad Kumar Rauta',
+    email: 'student@vssut.ac.in',
+    regNo: '25061011510037',
+    role: 'STUDENT'
   });
 
   const handleLogout = () => {
@@ -85,16 +118,16 @@ export default function App() {
           <Route path="/teacher/students" element={<TeacherStudents />} />
           <Route path="/teacher/resources" element={<TeacherResources />} />
           <Route path="/teacher/results" element={<TeacherResults />} />
-          <Route path="/teacher/profile" element={<TeacherProfile />} />
+          <Route path="/teacher/profile" element={<ErrorBoundary><TeacherProfile /></ErrorBoundary>} />
 
           {/* Student Routes */}
-          <Route path="/student/dashboard" element={<PlaceholderPage title="Student Dashboard" details="Academic summary, attendance status, upcoming classes, and recent results." />} />
-          <Route path="/student/schedule" element={<PlaceholderPage title="My Timetable" details="View daily class schedules and assigned classrooms." />} />
-          <Route path="/student/attendance" element={<PlaceholderPage title="Attendance Report" details="Subject-wise attendance percentage with <75% warnings." />} />
-          <Route path="/student/results" element={<PlaceholderPage title="My Exam Results" details="View published semester marks and CGPA grades." />} />
-          <Route path="/student/syllabus" element={<PlaceholderPage title="Course Syllabus" details="View subject modules and syllabus details." />} />
-          <Route path="/student/resources" element={<PlaceholderPage title="Learning Resources" details="Download study materials shared by faculty." />} />
-          <Route path="/student/profile" element={<PlaceholderPage title="Student Profile" details="View admission details and change password." />} />
+          <Route path="/student/dashboard" element={<StudentDashboard />} />
+          <Route path="/student/schedule" element={<StudentSchedule />} />
+          <Route path="/student/attendance" element={<StudentAttendance />} />
+          <Route path="/student/results" element={<StudentResults />} />
+          <Route path="/student/syllabus" element={<StudentSyllabus />} />
+          <Route path="/student/resources" element={<StudentResources />} />
+          <Route path="/student/profile" element={<StudentProfile />} />
         </Route>
       </Routes>
     </BrowserRouter>
