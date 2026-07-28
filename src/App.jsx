@@ -11,6 +11,7 @@ import Classes from './pages/admin/Classes';
 import Schedule from './pages/admin/Schedule';
 import AttendancePage from './pages/admin/attendance';
 import ResultsPage from './pages/admin/results';
+import TeacherDashboard from './pages/teacher/dashboard';
 
 /**
  * Placeholder Page Component for other sub-routes until implemented
@@ -27,10 +28,10 @@ function PlaceholderPage({ title, details }) {
 export default function App() {
   // Production Auth State: Automatically determined upon login
   const [currentUser] = useState({
-    name: 'Monalisa Jena',
-    email: 'monalisa@vssut.ac.in',
-    regNo: '2406151037',
-    role: 'ADMIN' // Options: 'ADMIN' | 'TEACHER' | 'STUDENT'
+    name: 'Dr. Satya Prakash Sahoo',
+    email: 'satya@vssut.ac.in',
+    regNo: 'VSSUT-FAC-0041',
+    role: 'TEACHER' // Switch to 'ADMIN' | 'STUDENT' as needed
   });
 
   const handleLogout = () => {
@@ -72,7 +73,7 @@ export default function App() {
           <Route path="/admin/profile" element={<PlaceholderPage title="Admin Profile" details="Manage account details, security settings, and password reset." />} />
 
           {/* Teacher Routes */}
-          <Route path="/teacher/dashboard" element={<PlaceholderPage title="Teacher Dashboard" details="View today's class schedule, quick attendance marking, and announcements." />} />
+          <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
           <Route path="/teacher/schedule" element={<PlaceholderPage title="My Class Schedule" details="Daily and weekly assigned timetable slots." />} />
           <Route path="/teacher/attendance" element={<PlaceholderPage title="Mark Attendance" details="Period-wise attendance marking (PRESENT, ABSENT, LATE)." />} />
           <Route path="/teacher/students" element={<PlaceholderPage title="My Students" details="View student class lists and attendance summaries." />} />
