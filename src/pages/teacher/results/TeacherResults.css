@@ -1,0 +1,15 @@
+/* Custom styling for Results page inputs and stats */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

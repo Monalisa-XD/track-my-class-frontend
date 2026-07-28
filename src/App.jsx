@@ -16,6 +16,7 @@ import TeacherSchedule from './pages/teacher/schedule';
 import TeacherAttendance from './pages/teacher/attendance';
 import TeacherStudents from './pages/teacher/students';
 import TeacherResources from './pages/teacher/resources';
+import TeacherResults from './pages/teacher/results';
 
 /**
  * Placeholder Page Component for other sub-routes until implemented
@@ -82,7 +83,7 @@ export default function App() {
           <Route path="/teacher/attendance" element={<TeacherAttendance />} />
           <Route path="/teacher/students" element={<TeacherStudents />} />
           <Route path="/teacher/resources" element={<TeacherResources />} />
-          <Route path="/teacher/results" element={<PlaceholderPage title="Submit Exam Marks" details="Enter student marks for internal and semester examinations." />} />
+          <Route path="/teacher/results" element={<TeacherResults />} />
           <Route path="/teacher/profile" element={<PlaceholderPage title="Faculty Profile" details="View personal information and change password." />} />
 
           {/* Student Routes */}
