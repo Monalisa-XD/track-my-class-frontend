@@ -110,7 +110,7 @@ export default function StudentProfile() {
   return (
     <div className="space-y-6">
       {/* Profile Hero Header */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-purple-700 via-purple-650 to-indigo-700 text-white p-6 md:p-8 shadow-purple-ambient border border-purple-500/20 select-none">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#7C3AED] to-[#A855F7] text-white p-6 md:p-8 shadow-purple-ambient border border-purple-500/20 select-none">
         {/* Inner Top Highlight */}
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
         <div className="absolute -right-12 -bottom-12 w-72 h-72 bg-gradient-to-tr from-violet-500/25 to-purple-400/20 rounded-full blur-3xl pointer-events-none" />
@@ -125,14 +125,14 @@ export default function StudentProfile() {
                   className="w-24 h-24 rounded-full object-cover border-2 border-white/20 shadow-lg group-hover:border-purple-300 transition-all duration-300"
                 />
               ) : (
-                <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-650 flex items-center justify-center border-2 border-white/20 shadow-lg group-hover:border-purple-300 transition-all duration-300 text-white text-xl font-black select-none">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-[#7C3AED] to-[#A855F7] flex items-center justify-center border-2 border-white/20 shadow-lg group-hover:border-purple-300 transition-all duration-300 text-white text-xl font-black select-none">
                   {getInitials(student.name)}
                 </div>
               )}
               <button 
                 onClick={() => fileInputRef.current?.click()}
                 type="button"
-                className="absolute -bottom-2 -right-2 p-1.5 bg-white text-purple-700 rounded-lg shadow-md border border-slate-100 hover:scale-105 transition-transform cursor-pointer"
+                className="absolute -bottom-2 -right-2 p-1.5 bg-white text-[#9333EA] rounded-lg shadow-md border border-slate-100 hover:scale-105 transition-transform cursor-pointer"
                 title="Upload Profile Picture"
               >
                 <Camera className="w-3.5 h-3.5" />
@@ -154,10 +154,10 @@ export default function StudentProfile() {
                   <span>{student.status}</span>
                 </span>
               </div>
-              <p className="text-xs text-purple-150 font-bold tracking-wide">
+              <p className="text-xs text-white/80 font-bold tracking-wide">
                 Reg No: {student.regNo} &nbsp;•&nbsp; {student.course}
               </p>
-              <p className="text-xs text-purple-200/90 font-medium">
+              <p className="text-xs text-white/70 font-medium">
                 {student.department} &nbsp;•&nbsp; {student.semester} ({student.section})
               </p>
             </div>
@@ -173,7 +173,7 @@ export default function StudentProfile() {
             </button>
             <button
               onClick={() => setShowPasswordModal(true)}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-purple-600 hover:bg-purple-700 border border-purple-500/25 text-white font-bold text-xs rounded-xl active:scale-95 transition-all cursor-pointer shadow-sm"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#9333EA] hover:bg-[#7E22CE] border border-purple-500/25 text-white font-bold text-xs rounded-xl active:scale-95 transition-all cursor-pointer shadow-sm"
             >
               <Lock className="w-3.5 h-3.5" />
               <span>Change Password</span>
@@ -497,7 +497,7 @@ export default function StudentProfile() {
                   type="text" 
                   value={editForm.emergencyContact}
                   onChange={(e) => setEditForm(prev => ({ ...prev, emergencyContact: e.target.value }))}
-                  className="w-full px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-purple-500 font-medium"
+                  className="w-full px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-[#9333EA] font-medium"
                 />
               </div>
 
@@ -511,7 +511,7 @@ export default function StudentProfile() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl cursor-pointer shadow-2xs active:scale-95 transition-all"
+                  className="px-4 py-2 bg-[#9333EA] hover:bg-[#7E22CE] text-white rounded-xl cursor-pointer shadow-2xs active:scale-95 transition-all"
                 >
                   Save Changes
                 </button>
@@ -545,7 +545,7 @@ export default function StudentProfile() {
                   value={passwordForm.currentPassword}
                   onChange={(e) => setPasswordForm(prev => ({ ...prev, currentPassword: e.target.value }))}
                   required
-                  className="w-full px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-purple-500 font-medium"
+                  className="w-full px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-[#9333EA] font-medium"
                 />
               </div>
 
@@ -557,7 +557,7 @@ export default function StudentProfile() {
                   value={passwordForm.newPassword}
                   onChange={(e) => setPasswordForm(prev => ({ ...prev, newPassword: e.target.value }))}
                   required
-                  className="w-full px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-purple-500 font-medium"
+                  className="w-full px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-[#9333EA] font-medium"
                 />
               </div>
 
@@ -569,7 +569,7 @@ export default function StudentProfile() {
                   value={passwordForm.confirmPassword}
                   onChange={(e) => setPasswordForm(prev => ({ ...prev, confirmPassword: e.target.value }))}
                   required
-                  className="w-full px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-purple-500 font-medium"
+                  className="w-full px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-[#9333EA] font-medium"
                 />
               </div>
 
@@ -583,7 +583,7 @@ export default function StudentProfile() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl cursor-pointer shadow-2xs active:scale-95 transition-all"
+                  className="px-4 py-2 bg-[#9333EA] hover:bg-[#7E22CE] text-white rounded-xl cursor-pointer shadow-2xs active:scale-95 transition-all"
                 >
                   Update Password
                 </button>

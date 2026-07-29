@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import AdminDashboard from './pages/admin/Dashboard';
+import AdminProfile from './pages/admin/profile';
 import Departments from './pages/admin/Departments';
 import Courses from './pages/admin/Courses';
 import Subjects from './pages/admin/Subjects';
@@ -26,6 +27,9 @@ import StudentSyllabus from './pages/student/syllabus';
 import StudentResources from './pages/student/resources';
 import StudentProfile from './pages/student/profile';
 import Login from './pages/auth/login';
+
+import { AuthProvider, useAuth } from './context/AuthContext';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -65,22 +69,8 @@ function PlaceholderPage({ title, details }) {
   );
 }
 
-export default function App() {
-  // Production Auth State: Load from localStorage
-  const [currentUser, setCurrentUser] = useState(() => {
-    const saved = localStorage.getItem('user');
-    return saved ? JSON.parse(saved) : null;
-  });
-
-  const handleLogin = (user) => {
-    localStorage.setItem('user', JSON.stringify(user));
-    setCurrentUser(user);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    setCurrentUser(null);
-  };
+function AppContent() {
+  const { currentUser, login: handleLogin, logout: handleLogout } = useAuth();
 
   const handleHeaderAction = (actionKey) => {
     const event = new CustomEvent('header-action', { detail: actionKey });
@@ -117,41 +107,66 @@ export default function App() {
           }
         >
           {/* Default Redirect */}
-          <Route path="/" element={<Navigate to={`/${currentUser?.role.toLowerCase()}/dashboard`} replace />} />
+          <Route 
+            path="/" 
+            element={
+              currentUser ? (
+                <Navigate to={`/${currentUser.role.toLowerCase()}/dashboard`} replace />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            } 
+          />
 
+          {/* Admin Protected Routes */}
+          <Route element={<ProtectedRoute allowedRole="ADMIN" />}>
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/departments" element={<Departments />} />
+            <Route path="/admin/courses" element={<Courses />} />
+            <Route path="/admin/subjects" element={<Subjects />} />
+            <Route path="/admin/teachers" element={<Teachers />} />
+            <Route path="/admin/students" element={<Students />} />
+            <Route path="/admin/classes" element={<Classes />} />
+            <Route path="/admin/schedule" element={<Schedule />} />
+            <Route path="/admin/attendance" element={<AttendancePage />} />
+            <Route path="/admin/results" element={<ResultsPage />} />
+            <Route path="/admin/profile" element={<AdminProfile />} />
+          </Route>
 
-          {/* Admin Routes */}
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/departments" element={<Departments />} />
-          <Route path="/admin/courses" element={<Courses />} />
-          <Route path="/admin/subjects" element={<Subjects />} />
-          <Route path="/admin/teachers" element={<Teachers />} />
-          <Route path="/admin/students" element={<Students />} />
-          <Route path="/admin/classes" element={<Classes />} />
-          <Route path="/admin/schedule" element={<Schedule />} />
-          <Route path="/admin/attendance" element={<AttendancePage />} />
-          <Route path="/admin/results" element={<ResultsPage />} />
-          <Route path="/admin/profile" element={<PlaceholderPage title="Admin Profile" details="Manage account details, security settings, and password reset." />} />
+          {/* Teacher Protected Routes */}
+          <Route element={<ProtectedRoute allowedRole="TEACHER" />}>
+            <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
+            <Route path="/teacher/schedule" element={<TeacherSchedule />} />
+            <Route path="/teacher/attendance" element={<TeacherAttendance />} />
+            <Route path="/teacher/students" element={<TeacherStudents />} />
+            <Route path="/teacher/resources" element={<TeacherResources />} />
+            <Route path="/teacher/results" element={<TeacherResults />} />
+            <Route path="/teacher/profile" element={<ErrorBoundary><TeacherProfile /></ErrorBoundary>} />
+          </Route>
 
-          {/* Teacher Routes */}
-          <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
-          <Route path="/teacher/schedule" element={<TeacherSchedule />} />
-          <Route path="/teacher/attendance" element={<TeacherAttendance />} />
-          <Route path="/teacher/students" element={<TeacherStudents />} />
-          <Route path="/teacher/resources" element={<TeacherResources />} />
-          <Route path="/teacher/results" element={<TeacherResults />} />
-          <Route path="/teacher/profile" element={<ErrorBoundary><TeacherProfile /></ErrorBoundary>} />
-
-          {/* Student Routes */}
-          <Route path="/student/dashboard" element={<StudentDashboard />} />
-          <Route path="/student/schedule" element={<StudentSchedule />} />
-          <Route path="/student/attendance" element={<StudentAttendance />} />
-          <Route path="/student/results" element={<StudentResults />} />
-          <Route path="/student/syllabus" element={<StudentSyllabus />} />
-          <Route path="/student/resources" element={<StudentResources />} />
-          <Route path="/student/profile" element={<StudentProfile />} />
+          {/* Student Protected Routes */}
+          <Route element={<ProtectedRoute allowedRole="STUDENT" />}>
+            <Route path="/student/dashboard" element={<StudentDashboard />} />
+            <Route path="/student/schedule" element={<StudentSchedule />} />
+            <Route path="/student/attendance" element={<StudentAttendance />} />
+            <Route path="/student/results" element={<StudentResults />} />
+            <Route path="/student/syllabus" element={<StudentSyllabus />} />
+            <Route path="/student/resources" element={<StudentResources />} />
+            <Route path="/student/profile" element={<StudentProfile />} />
+          </Route>
         </Route>
+        
+        {/* Wildcard Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
+  );
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }

@@ -128,29 +128,13 @@ export default function MainLayout({
     ? 'STUDENT'
     : 'ADMIN';
 
-  // Demo users for each role
-  const displayUser = {
-    ADMIN: {
-      name: 'Monalisa Jena',
-      email: 'admin@vssut.ac.in',
-      regNo: '2406151037',
-      role: 'ADMIN'
-    },
-    TEACHER: {
-      name: 'Dr. Satya Prakash Sahoo',
-      email: 'satya@vssut.ac.in',
-      regNo: 'VSSUT-FAC-0041',
-      role: 'TEACHER'
-    },
-    STUDENT: {
-      name: 'Prasad Kumar Rauta',
-      email: 'student@vssut.ac.in',
-      regNo: '25061011510037',
-      role: 'STUDENT'
-    }
+  // Use authenticated user prop, fallback to active role default
+  const currentDisplayUser = user || {
+    name: 'Monalisa Jena',
+    email: 'admin@vssut.ac.in',
+    regNo: '2406151037',
+    role: 'ADMIN'
   };
-
-  const currentDisplayUser = displayUser[activeRole];
 
   useEffect(() => {
     setIsMobileSidebarOpen(false);

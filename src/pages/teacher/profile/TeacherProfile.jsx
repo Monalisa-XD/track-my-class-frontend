@@ -100,13 +100,13 @@ export default function TeacherProfile() {
   return (
     <div className="space-y-6 relative min-h-screen">
       {/* Profile Banner / Header */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 text-white p-6 md:p-8 shadow-ambient border border-blue-500/30 transition-all duration-300 hover:shadow-ambient-hover select-none">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#047857] to-[#10B981] text-white p-6 md:p-8 shadow-ambient border border-emerald-500/20 transition-all duration-300 hover:shadow-ambient-hover select-none">
         {/* Inner Top Highlight */}
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
 
         {/* Decorative Orbs */}
-        <div className="absolute -right-12 -bottom-12 w-72 h-72 bg-gradient-to-tr from-indigo-500/20 to-blue-400/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute right-48 -top-24 w-56 h-56 bg-blue-400/15 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute -right-12 -bottom-12 w-72 h-72 bg-gradient-to-tr from-emerald-500/20 to-teal-400/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute right-48 -top-24 w-56 h-56 bg-emerald-400/15 rounded-full blur-2xl pointer-events-none" />
 
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           {/* Avatar Photo, Name, and Designation */}
@@ -128,10 +128,10 @@ export default function TeacherProfile() {
                   Active Faculty
                 </span>
               </div>
-              <p className="text-sm text-blue-100/90 font-medium">
+              <p className="text-sm text-emerald-100/90 font-medium">
                 {teacher.designation} &nbsp;•&nbsp; {teacher.department}
               </p>
-              <p className="text-xs text-blue-200/80 font-mono font-bold">Employee ID: {teacher.employeeId}</p>
+              <p className="text-xs text-emerald-200/80 font-mono font-bold">Employee ID: {teacher.employeeId}</p>
             </div>
           </div>
 
@@ -140,7 +140,7 @@ export default function TeacherProfile() {
             <button
               type="button"
               onClick={openEditModal}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-white text-blue-700 hover:bg-blue-50 font-bold text-xs rounded-xl shadow-md transition-all duration-200 active:scale-95 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-white text-[#059669] hover:bg-emerald-50 font-bold text-xs rounded-xl shadow-md transition-all duration-200 active:scale-95 transition-all cursor-pointer"
             >
               <Edit2 className="w-3.5 h-3.5" />
               <span>Edit Profile</span>
@@ -150,7 +150,7 @@ export default function TeacherProfile() {
               onClick={() => setIsPasswordModalOpen(true)}
               className="inline-flex items-center gap-1.5 px-4 py-2 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-xl backdrop-blur-md border border-white/20 shadow-md transition-all duration-200 active:scale-95 cursor-pointer"
             >
-              <Lock className="w-3.5 h-3.5 text-blue-200" />
+              <Lock className="w-3.5 h-3.5 text-emerald-200" />
               <span>Change Password</span>
             </button>
           </div>
@@ -160,9 +160,9 @@ export default function TeacherProfile() {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 select-none">
         {/* Assigned Subjects */}
-        <div className="group relative bg-white p-5 rounded-2xl border border-slate-200/80 shadow-ambient inner-highlight transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-ambient-hover flex items-center gap-4 overflow-hidden hover:shadow-glow-blue hover:border-blue-300/80">
+        <div className="group relative bg-white p-5 rounded-2xl border border-slate-200/80 shadow-ambient inner-highlight transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-ambient-hover flex items-center gap-4 overflow-hidden hover:shadow-glow-emerald hover:border-emerald-300/80">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200/50 to-transparent opacity-60" />
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-600 text-white flex items-center justify-center shrink-0 shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-all">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-[#047857] to-[#10B981] text-white flex items-center justify-center shrink-0 shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-all">
             <BookOpen className="w-6 h-6" />
           </div>
           <div className="flex-1 min-w-0">
@@ -219,7 +219,7 @@ export default function TeacherProfile() {
           {/* Personal Information Block */}
           <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-ambient select-none space-y-5">
             <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-3 flex items-center gap-1.5">
-              <User className="w-4.5 h-4.5 text-blue-600" />
+              <User className="w-4.5 h-4.5 text-[#059669]" />
               <span>Personal Information</span>
             </h3>
 
@@ -274,7 +274,7 @@ export default function TeacherProfile() {
           {/* Assigned Classes List Card - Placed below Personal Information */}
           <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-ambient select-none space-y-4">
             <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-3 flex items-center gap-1.5">
-              <Users className="w-4.5 h-4.5 text-blue-600" />
+              <Users className="w-4.5 h-4.5 text-[#059669]" />
               <span>Assigned Classes</span>
             </h3>
 
@@ -337,7 +337,7 @@ export default function TeacherProfile() {
             {/* Notification preferences card */}
             <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-ambient select-none space-y-4">
               <div className="flex items-center gap-3">
-                <div className="bg-blue-50 text-blue-600 p-2 rounded-lg border border-blue-100 shrink-0">
+                <div className="bg-emerald-50 text-[#059669] p-2 rounded-lg border border-emerald-100 shrink-0">
                   <Bell className="w-4.5 h-4.5" />
                 </div>
                 <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Notification Preferences</h3>
@@ -346,19 +346,19 @@ export default function TeacherProfile() {
               <div className="space-y-3 pt-1 text-xs font-semibold text-slate-650">
                 <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-100 cursor-pointer" onClick={() => setNotifEmail(!notifEmail)}>
                   <span>Email Alerts</span>
-                  {notifEmail ? <CheckSquare className="w-4 h-4 text-blue-600 shrink-0" /> : <Square className="w-4 h-4 text-slate-300 shrink-0" />}
+                  {notifEmail ? <CheckSquare className="w-4 h-4 text-[#059669] shrink-0" /> : <Square className="w-4 h-4 text-slate-300 shrink-0" />}
                 </div>
                 <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-100 cursor-pointer" onClick={() => setNotifPush(!notifPush)}>
                   <span>Push Alerts</span>
-                  {notifPush ? <CheckSquare className="w-4 h-4 text-blue-600 shrink-0" /> : <Square className="w-4 h-4 text-slate-300 shrink-0" />}
+                  {notifPush ? <CheckSquare className="w-4 h-4 text-[#059669] shrink-0" /> : <Square className="w-4 h-4 text-slate-300 shrink-0" />}
                 </div>
                 <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-100 cursor-pointer" onClick={() => setNotifSchedule(!notifSchedule)}>
                   <span>Schedule Updates</span>
-                  {notifSchedule ? <CheckSquare className="w-4 h-4 text-blue-600 shrink-0" /> : <Square className="w-4 h-4 text-slate-300 shrink-0" />}
+                  {notifSchedule ? <CheckSquare className="w-4 h-4 text-[#059669] shrink-0" /> : <Square className="w-4 h-4 text-slate-300 shrink-0" />}
                 </div>
                 <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-100 cursor-pointer" onClick={() => setNotifGrades(!notifGrades)}>
                   <span>Grades Reminders</span>
-                  {notifGrades ? <CheckSquare className="w-4 h-4 text-blue-600 shrink-0" /> : <Square className="w-4 h-4 text-slate-300 shrink-0" />}
+                  {notifGrades ? <CheckSquare className="w-4 h-4 text-[#059669] shrink-0" /> : <Square className="w-4 h-4 text-slate-300 shrink-0" />}
                 </div>
               </div>
             </div>
@@ -366,7 +366,7 @@ export default function TeacherProfile() {
             {/* Security settings card */}
             <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-ambient select-none space-y-4">
               <div className="flex items-center gap-3">
-                <div className="bg-purple-50 text-purple-600 p-2 rounded-lg border border-purple-100 shrink-0">
+                <div className="bg-emerald-50 text-[#059669] p-2 rounded-lg border border-emerald-100 shrink-0">
                   <Shield className="w-4.5 h-4.5" />
                 </div>
                 <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Security Settings</h3>
@@ -378,21 +378,21 @@ export default function TeacherProfile() {
                     <p>Two-Factor Auth (2FA)</p>
                     <p className="text-[10px] text-slate-400 font-semibold mt-0.5">Extra verification step</p>
                   </div>
-                  {sec2FA ? <CheckSquare className="w-4 h-4 text-purple-600 shrink-0" /> : <Square className="w-4 h-4 text-slate-300 shrink-0" />}
+                  {sec2FA ? <CheckSquare className="w-4 h-4 text-[#059669] shrink-0" /> : <Square className="w-4 h-4 text-slate-300 shrink-0" />}
                 </div>
                 <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-100 cursor-pointer" onClick={() => setSecAlerts(!secAlerts)}>
                   <div>
                     <p>Log In Alerts</p>
                     <p className="text-[10px] text-slate-400 font-semibold mt-0.5">Notices on new log ins</p>
                   </div>
-                  {secAlerts ? <CheckSquare className="w-4 h-4 text-purple-600 shrink-0" /> : <Square className="w-4 h-4 text-slate-300 shrink-0" />}
+                  {secAlerts ? <CheckSquare className="w-4 h-4 text-[#059669] shrink-0" /> : <Square className="w-4 h-4 text-slate-300 shrink-0" />}
                 </div>
                 <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-100 cursor-pointer" onClick={() => setSecTimeout(!secTimeout)}>
                   <div>
                     <p>Auto Session Timeout</p>
                     <p className="text-[10px] text-slate-400 font-semibold mt-0.5">Timeout after 30 mins</p>
                   </div>
-                  {secTimeout ? <CheckSquare className="w-4 h-4 text-purple-600 shrink-0" /> : <Square className="w-4 h-4 text-slate-300 shrink-0" />}
+                  {secTimeout ? <CheckSquare className="w-4 h-4 text-[#059669] shrink-0" /> : <Square className="w-4 h-4 text-slate-300 shrink-0" />}
                 </div>
               </div>
             </div>
@@ -404,7 +404,7 @@ export default function TeacherProfile() {
           {/* Recent Login / Last Active Card */}
           <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-ambient select-none space-y-4">
             <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-              <Laptop className="w-4.5 h-4.5 text-blue-600" />
+              <Laptop className="w-4.5 h-4.5 text-[#059669]" />
               <span>Last Active Session</span>
             </h3>
 
@@ -444,7 +444,7 @@ export default function TeacherProfile() {
                   <span className="text-slate-850 font-bold">{performanceSummary.studentFeedback} / 5.0</span>
                 </div>
                 <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                  <div className="bg-indigo-650 h-full rounded-full" style={{ width: '96%' }}></div>
+                  <div className="bg-[#059669] h-full rounded-full" style={{ width: '96%' }}></div>
                 </div>
               </div>
 
@@ -454,7 +454,7 @@ export default function TeacherProfile() {
                   <span className="text-slate-850 font-bold">{performanceSummary.curriculumCoverage}%</span>
                 </div>
                 <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                  <div className="bg-blue-600 h-full rounded-full" style={{ width: '92%' }}></div>
+                  <div className="bg-[#10B981] h-full rounded-full" style={{ width: '92%' }}></div>
                 </div>
               </div>
 
@@ -473,14 +473,14 @@ export default function TeacherProfile() {
           {/* Recent Log Activities */}
           <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-ambient select-none space-y-4">
             <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-              <Activity className="w-4.5 h-4.5 text-blue-600" />
+              <Activity className="w-4.5 h-4.5 text-[#059669]" />
               <span>Recent Activities</span>
             </h3>
 
             <div className="space-y-3.5">
               {recentActivities.map(act => (
                 <div key={act.id} className="flex gap-2.5 items-start text-xs border-b border-slate-55 pb-3 last:border-0 last:pb-0">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 shrink-0" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#059669] mt-1.5 shrink-0" />
                   <div>
                     <p className="text-slate-650 font-semibold leading-relaxed">{act.message}</p>
                     <span className="text-[10px] text-slate-400 font-bold mt-1 inline-block">{act.time}</span>
@@ -499,7 +499,7 @@ export default function TeacherProfile() {
             <div className="space-y-3">
               {upcomingClasses.map(cls => (
                 <div key={cls.id} className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-100">
-                  <div className="bg-blue-50 text-blue-600 p-2 rounded-lg border border-blue-100 shrink-0">
+                  <div className="bg-emerald-50 text-[#059669] p-2 rounded-lg border border-emerald-100 shrink-0">
                     <Clock className="w-4 h-4" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -542,7 +542,7 @@ export default function TeacherProfile() {
                     <button 
                       type="button"
                       onClick={() => alert('Photo upload triggered (UI only)...')}
-                      className="text-[10px] text-blue-600 font-bold hover:text-blue-700 mt-1 cursor-pointer"
+                      className="text-[10px] text-[#059669] font-bold hover:text-[#047857] mt-1 cursor-pointer"
                     >
                       Upload new image
                     </button>
@@ -557,7 +557,7 @@ export default function TeacherProfile() {
                     value={tempPhone}
                     onChange={(e) => setTempPhone(e.target.value)}
                     required
-                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 rounded-xl outline-none transition-all font-medium text-slate-800"
+                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 rounded-xl outline-none transition-all font-medium text-slate-800"
                   />
                 </div>
 
@@ -569,7 +569,7 @@ export default function TeacherProfile() {
                     onChange={(e) => setTempAddress(e.target.value)}
                     required
                     rows="3"
-                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 rounded-xl outline-none transition-all font-medium text-slate-800 resize-none"
+                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 rounded-xl outline-none transition-all font-medium text-slate-800 resize-none"
                   />
                 </div>
 
@@ -581,7 +581,7 @@ export default function TeacherProfile() {
                     value={tempEmergency}
                     onChange={(e) => setTempEmergency(e.target.value)}
                     required
-                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 rounded-xl outline-none transition-all font-medium text-slate-800"
+                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 rounded-xl outline-none transition-all font-medium text-slate-800"
                   />
                 </div>
               </div>
@@ -596,7 +596,7 @@ export default function TeacherProfile() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md cursor-pointer"
+                  className="px-4 py-2 bg-[#059669] hover:bg-[#047857] text-white font-bold text-xs rounded-xl shadow-md cursor-pointer"
                 >
                   Save Changes
                 </button>
@@ -633,7 +633,7 @@ export default function TeacherProfile() {
                     onChange={(e) => setCurrentPassword(e.target.value)}
                     required
                     placeholder="Enter current password"
-                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 rounded-xl outline-none font-medium text-slate-800"
+                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-emerald-500 rounded-xl outline-none font-medium text-slate-800"
                   />
                 </div>
 
@@ -646,7 +646,7 @@ export default function TeacherProfile() {
                     onChange={(e) => setNewPassword(e.target.value)}
                     required
                     placeholder="Enter new password"
-                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 rounded-xl outline-none font-medium text-slate-800"
+                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-emerald-500 rounded-xl outline-none font-medium text-slate-800"
                   />
                 </div>
 
@@ -659,7 +659,7 @@ export default function TeacherProfile() {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                     placeholder="Confirm new password"
-                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 rounded-xl outline-none font-medium text-slate-800"
+                    className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-emerald-500 rounded-xl outline-none font-medium text-slate-800"
                   />
                 </div>
               </div>
@@ -674,7 +674,7 @@ export default function TeacherProfile() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md cursor-pointer"
+                  className="px-4 py-2 bg-[#059669] hover:bg-[#047857] text-white font-bold text-xs rounded-xl shadow-md cursor-pointer"
                 >
                   Update Password
                 </button>
