@@ -137,13 +137,11 @@ export default function StudentResources() {
 
   return (
     <div className="space-y-6">
-      {/* Top Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-purple-ambient select-none">
-        <div>
-          <h2 className="text-xl font-bold text-slate-800 tracking-tight">Learning Resources</h2>
-          <p className="text-xs text-slate-500 font-semibold mt-1">
-            Student Portal &nbsp;•&nbsp; <span className="text-purple-655 font-bold">Study Materials</span>
-          </p>
+      {/* Filters Toolbar Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4.5 rounded-2xl border border-slate-200/80 shadow-purple-ambient select-none">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-purple-655 animate-pulse shadow-sm shadow-purple-400" />
+          <span className="text-xs font-bold text-slate-700 tracking-wide">Study Materials</span>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
@@ -176,18 +174,7 @@ export default function StudentResources() {
             </select>
           </div>
 
-          {/* Semester Dropdown */}
-          <div className="relative min-w-[130px]">
-            <select
-              value={selectedSemester}
-              onChange={(e) => setSelectedSemester(e.target.value)}
-              className="w-full pl-3.5 pr-8 py-2 text-xs bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-purple-500 rounded-xl outline-none appearance-none font-semibold text-slate-700 cursor-pointer"
-            >
-              {semesters.map(sem => (
-                <option key={sem} value={sem}>{sem}</option>
-              ))}
-            </select>
-          </div>
+
         </div>
       </div>
 
@@ -276,19 +263,7 @@ export default function StudentResources() {
             </select>
           </div>
 
-          {/* Semester Filter */}
-          <div className="relative min-w-[140px]">
-            <select
-              value={filterSem}
-              onChange={(e) => setFilterSem(e.target.value)}
-              className="w-full pl-3.5 pr-8 py-2.5 text-xs bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-purple-500 rounded-xl outline-none appearance-none font-semibold text-slate-700 cursor-pointer"
-            >
-              <option value="All">All Semesters</option>
-              {semesters.map(s => (
-                <option key={s} value={s}>{s}</option>
-              ))}
-            </select>
-          </div>
+
 
           {/* Search Input */}
           <div className="relative flex-1 min-w-[180px] max-w-[245px]">

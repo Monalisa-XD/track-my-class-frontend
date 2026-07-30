@@ -338,15 +338,6 @@ export default function TeacherSchedule() {
                 <option key={year} value={year}>{year} AY</option>
               ))}
             </select>
-            <select
-              value={selectedSemester}
-              onChange={(e) => setSelectedSemester(e.target.value)}
-              className="pl-3.5 pr-8 py-2.5 text-xs bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl font-semibold text-slate-700 cursor-pointer outline-none appearance-none"
-            >
-              {semesters.map(sem => (
-                <option key={sem} value={sem}>{sem.split(' ')[0]}</option>
-              ))}
-            </select>
           </div>
 
           {(selectedDay !== 'All' || selectedSubject !== 'All' || classroomSearch !== '') && (

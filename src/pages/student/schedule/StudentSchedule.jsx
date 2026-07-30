@@ -91,13 +91,11 @@ export default function StudentSchedule() {
 
   return (
     <div className="space-y-6">
-      {/* Top Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-purple-ambient select-none">
-        <div>
-          <h2 className="text-xl font-bold text-slate-800 tracking-tight">My Schedule</h2>
-          <p className="text-xs text-slate-500 font-semibold mt-1">
-            Student Portal &nbsp;•&nbsp; <span className="text-purple-650 font-bold">Class Timetable</span>
-          </p>
+      {/* Filters Toolbar Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4.5 rounded-2xl border border-slate-200/80 shadow-purple-ambient select-none">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-purple-650 animate-pulse shadow-sm shadow-purple-400" />
+          <span className="text-xs font-bold text-slate-700 tracking-wide">Class Timetable</span>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
@@ -126,19 +124,6 @@ export default function StudentSchedule() {
             >
               {academicYears.map(year => (
                 <option key={year} value={year}>{year}</option>
-              ))}
-            </select>
-          </div>
-
-          {/* Semester Dropdown */}
-          <div className="relative min-w-[145px]">
-            <select
-              value={selectedSemester}
-              onChange={(e) => setSelectedSemester(e.target.value)}
-              className="w-full pl-3.5 pr-8 py-2 text-xs bg-slate-50 border border-slate-200 hover:border-slate-300 focus:bg-white focus:border-purple-500 rounded-xl outline-none appearance-none font-semibold text-slate-700 cursor-pointer"
-            >
-              {semesters.map(sem => (
-                <option key={sem} value={sem}>{sem}</option>
               ))}
             </select>
           </div>
