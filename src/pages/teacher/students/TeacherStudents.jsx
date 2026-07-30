@@ -392,7 +392,7 @@ export default function TeacherStudents() {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-slate-50 border-b border-slate-200 text-xs font-extrabold uppercase tracking-wider text-slate-500">
-                    <th className="py-4 px-5">Photo / Avatar</th>
+                    <th className="py-4 px-5">Photo</th>
                     <th className="py-4 px-5">Roll Number</th>
                     <th className="py-4 px-5">Student Name</th>
                     <th className="py-4 px-5">Department</th>
@@ -420,7 +420,7 @@ export default function TeacherStudents() {
                       return (
                         <tr key={student.regNo} className="hover:bg-slate-50/40 transition-colors">
                           <td className="py-3.5 px-5">
-                            <div className="w-8.5 h-8.5 rounded-full bg-gradient-to-tr from-blue-550 to-indigo-650 text-white flex items-center justify-center font-extrabold text-[10px] shadow-sm">
+                            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center font-extrabold text-xs shadow-sm">
                               {getInitials(student.name)}
                             </div>
                           </td>

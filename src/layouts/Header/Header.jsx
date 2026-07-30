@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { ChevronRight, Plus, Home } from 'lucide-react';
+import { ChevronRight, Plus, Home, FileSpreadsheet } from 'lucide-react';
 import './Header.css';
 
 /**
@@ -159,15 +159,26 @@ export default function Header({
 
         {/* Right Side: Dynamic Action Button */}
         {pageAction && (
-          <div className="shrink-0 pt-0.5 sm:pt-0">
-            <button
-              onClick={() => onActionClick && onActionClick(pageAction.actionKey)}
-              type="button"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs font-semibold shadow-md shadow-blue-600/20 transition-all duration-150 hover:shadow-lg hover:shadow-blue-600/30 active:scale-[0.98]"
-            >
-              <Plus className="w-4 h-4" />
-              <span>{pageAction.label}</span>
-            </button>
+          <div className="shrink-0 pt-0.5 sm:pt-0 flex items-center gap-2">
+            {(Array.isArray(pageAction) ? pageAction : [pageAction]).map((action, index) => {
+              const isSecondary = action.variant === 'secondary';
+              const Icon = action.actionKey === 'UPLOAD_EXCEL' ? FileSpreadsheet : Plus;
+              return (
+                <button
+                  key={action.actionKey || index}
+                  onClick={() => onActionClick && onActionClick(action.actionKey)}
+                  type="button"
+                  className={
+                    isSecondary
+                      ? "w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold active:scale-[0.98] transition-all duration-150 cursor-pointer"
+                      : "w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs font-semibold shadow-md shadow-blue-600/20 transition-all duration-150 hover:shadow-lg hover:shadow-blue-600/30 active:scale-[0.98] cursor-pointer"
+                  }
+                >
+                  <Icon className="w-4 h-4" />
+                  <span>{action.label}</span>
+                </button>
+              );
+            })}
           </div>
         )}
 

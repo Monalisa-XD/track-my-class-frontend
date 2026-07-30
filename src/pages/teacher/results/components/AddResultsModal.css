@@ -1,0 +1,4 @@
+/* AddResultsModal component styles */
+.backdrop-blur-xs {
+  backdrop-filter: blur(2px);
+}

@@ -30,6 +30,7 @@ import Login from './pages/auth/login';
 
 import { AuthProvider, useAuth } from './context/AuthContext';
 import ProtectedRoute from './routes/ProtectedRoute';
+import { Toaster } from 'react-hot-toast';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -167,6 +168,7 @@ export default function App() {
   return (
     <AuthProvider>
       <AppContent />
+      <Toaster position="top-right" reverseOrder={false} />
     </AuthProvider>
   );
 }

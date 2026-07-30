@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { 
   Award, 
   Users, 
@@ -18,6 +18,8 @@ import {
 } from 'lucide-react';
 import { teacherResultsData } from './data/resultsData';
 import './TeacherResults.css';
+import AddResultsModal from './components/AddResultsModal';
+import { toast } from 'react-hot-toast';
 
 export default function TeacherResults() {
   const { academicYears, semesters, subjects, exams, sections, recentSubmissions, initialResults } = teacherResultsData;
@@ -36,6 +38,7 @@ export default function TeacherResults() {
 
   // Results Local State (allows editing marks)
   const [resultsList, setResultsList] = useState(initialResults);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   // Grade calculator helper
   const calculateGrade = (total) => {
@@ -68,6 +71,93 @@ export default function TeacherResults() {
   const handleReset = () => {
     setResultsList(initialResults);
     setSearchQuery('');
+  };
+
+  // Connect to global page-header action button using window event listener
+  useEffect(() => {
+    const handleHeaderAction = (e) => {
+      if (e.detail === 'ADD_RESULTS') {
+        setIsAddModalOpen(true);
+      }
+    };
+    window.addEventListener('header-action', handleHeaderAction);
+    return () => {
+      window.removeEventListener('header-action', handleHeaderAction);
+    };
+  }, []);
+
+  // Compute unique students from results list
+  const uniqueStudents = useMemo(() => {
+    const seen = new Set();
+    const list = [];
+    resultsList.forEach(item => {
+      const nameVal = item.studentName || item.name || '';
+      if (!seen.has(item.rollNo) && item.rollNo) {
+        seen.add(item.rollNo);
+        list.push({
+          rollNo: item.rollNo,
+          studentName: nameVal,
+          department: item.department,
+          semester: item.semester,
+          section: item.section
+        });
+      }
+    });
+    return list;
+  }, [resultsList]);
+
+  // Handle adding new result
+  const handleAddResultSave = (newResult) => {
+    // Check if result already exists in state
+    const alreadyExists = resultsList.some(r => 
+      r.rollNo === newResult.rollNo && 
+      r.subject === newResult.subject && 
+      r.exam === newResult.exam
+    );
+
+    if (alreadyExists) {
+      toast.error('A result for this student, subject, and exam type already exists.');
+      return;
+    }
+
+    setResultsList(prev => [
+      newResult,
+      ...prev
+    ]);
+    setIsAddModalOpen(false);
+    toast.success('Result added successfully.');
+  };
+
+  const handleExcelUpload = (newResults) => {
+    const duplicates = [];
+    const toAdd = [];
+
+    newResults.forEach(newRes => {
+      const exists = resultsList.some(r => 
+        r.rollNo === newRes.rollNo && 
+        r.subject === newRes.subject && 
+        r.exam === newRes.exam
+      );
+      if (exists) {
+        duplicates.push(newRes.studentName || newRes.rollNo);
+      } else {
+        toAdd.push(newRes);
+      }
+    });
+
+    if (toAdd.length > 0) {
+      setResultsList(prev => [
+        ...toAdd,
+        ...prev
+      ]);
+      toast.success(`Successfully uploaded and added results for ${toAdd.length} student(s).`);
+    }
+
+    if (duplicates.length > 0) {
+      toast.error(`Skipped duplicate result(s) for: ${duplicates.join(', ')}`);
+    }
+
+    setIsAddModalOpen(false);
   };
 
   // Action: Save Draft
@@ -604,6 +694,18 @@ export default function TeacherResults() {
           </div>
         </div>
       </div>
+      
+      <AddResultsModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onSave={handleAddResultSave}
+        onUpload={handleExcelUpload}
+        subjects={subjects}
+        academicYears={academicYears}
+        semesters={semesters}
+        exams={exams}
+        students={uniqueStudents}
+      />
     </div>
   );
 }
